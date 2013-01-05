@@ -1,4 +1,5 @@
-# Summary
+Summary
+=======
 
 This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing
 feature tests for REST APIs.
