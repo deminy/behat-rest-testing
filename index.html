@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Behat-rest-testing : Demo on how to do feature tests with Behat and how to start writing feature tests for REST APIs." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Behat-rest-testing</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/deminy/behat-rest-testing">View on GitHub</a>
+
+          <h1 id="project_title">Behat-rest-testing</h1>
+          <h2 id="project_tagline">Demo on how to do feature tests with Behat and how to start writing feature tests for REST APIs.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/deminy/behat-rest-testing/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/deminy/behat-rest-testing/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Summary</h1>
+
+<p>This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing
+feature tests for REST APIs.</p>
+
+<p>This is based on <a href="https://github.com/kloy/behat-rest-testing">Keith Loy's work</a> (which was essential a hard fork of 
+<a href="https://github.com/enygma/behat-fuel-rest">Chris Cornutt's work</a>), with following major changes made by me:</p>
+
+<ul>
+<li>The best of all: for the project you are working on, you don't have to put this repo into your project or create
+feature tests under this repo. You can always create feature tests under your project, then use this repo to run
+the tests. Thus, both your project and this repo are separated from each other and clean.</li>
+<li>Added sample RESTful services, and changed/added features to test against the services.</li>
+<li>Added samples for closured steps.</li>
+<li>Added samples for closured hooks.</li>
+<li>Removed anything related to PHP framework <a href="http://laravel.com/">Laravel</a>.</li>
+</ul><p>Because of the heavy changes made above, instead of forking from Keith's repo directly, I created a new repo with same
+repo name.</p>
+
+<h1>Dependencies</h1>
+
+<ul>
+<li>
+<a href="http://www.php.net">PHP</a> 5.3.0+</li>
+<li>PHP extension <a href="http://www.php.net/mbstring">mbstring</a> (used by <a href="http://www.behat.org">Behat</a>)</li>
+</ul><h1>Install</h1>
+
+<p>You will need to download composer.phar and run the install command under the same directory where the 'composer.json'
+file is located:</p>
+
+<pre><code>curl -s http://getcomposer.org/installer | php &amp;&amp; ./composer.phar install
+</code></pre>
+
+<h1>How to Test</h1>
+
+<h3>1. Set up and run REST API server.</h3>
+
+<p>You can have a virtual host set up under Apache, with DocumentRoot set to "www/" of this repo and DirectoryIndex set
+to "router.php". Alternatively, you may consider to use the 
+<a href="http://php.net/manual/en/features.commandline.webserver.php">PHP 5.4 built-in web server</a>:</p>
+
+<h4>1.1. Install PHP 5.4.</h4>
+
+<p>If you happen not have PHP 5.4, please download it and use following command to install it:</p>
+
+<pre><code>./configure --prefix=/usr/local/php54
+make
+sudo make install
+</code></pre>
+
+<h4>1.2. Start the REST API server.</h4>
+
+<p>To start the <a href="http://php.net/manual/en/features.commandline.webserver.php">PHP 5.4 built-in web server</a>, please
+run following command:</p>
+
+<pre><code>/usr/local/php54/bin/php -S localhost:8081 www/router.php
+</code></pre>
+
+<p>The web server now serves as the REST API server. You can visit URL http://localhost:8081 to see if the server runs
+properly or not (If everything is good, the URL should return string "OK" back).</p>
+
+<h3>2. Test the sample features.</h3>
+
+<h4>2.1. Create the configuration file "behat.yml".</h4>
+
+<p>For the sample test provided, you can create the file by copying directly from file "behat.yml.dist" without any
+modifications required.</p>
+
+<h4>2.2. Run the test command.</h4>
+
+<p>Now, run following command to test sample features:</p>
+
+<pre><code>bin/behat
+</code></pre>
+
+<p>If everything is good, you should see the out as in following screenshot:</p>
+
+<p><img src="/deminy/behat-rest-testing/blob/master/screenshot.png?raw=true" alt="the output when running sample tests with Behat"></p>
+
+<h1>Create Feature Tests for Your Project</h1>
+
+<p>You can always create step/hook definitions under the installation of this repo. However, a better way might be to
+organize your files like this:</p>
+
+<pre>
+/behat-rest-testing/
+     behat.yml
+/myProject
+    src/
+    tests/
+        features/
+            myProjectFeature.1.feature
+            myProjectFeature.2.feature
+            steps/
+                myProjectSteps.1.php
+                myProjectSteps.2.php
+                // ......
+            support/
+                myProjectHooks.1.php    
+                myProjectHooks.2.php
+                // ......
+</pre>
+
+<p>Your put your step/hook definitions under folder "/myProject/tests/features", and have paths defined in the
+configuration file "/behat-rest-testing/behat.yml". Then, you can call command "/behat-rest-testing/bin/behat" to test
+your REST APIs.</p>
+
+<h1>TODOs</h1>
+
+<ul>
+<li>Allow to add project-related .feature files outside the repo.</li>
+<li>Support different environments (development, QA, staging, production, etc).</li>
+</ul><h1>Known Limitations</h1>
+
+<ul>
+<li>Not allow to add project-related .feature files outside the repo.</li>
+<li>The code may not work under Windows platforms.</li>
+</ul><h1>Credits</h1>
+
+<ul>
+<li>Keith Loy's work at <a href="https://github.com/kloy/behat-rest-testing">https://github.com/kloy/behat-rest-testing</a>
+</li>
+<li>Chris Cornutt's work at <a href="https://github.com/enygma/behat-fuel-rest">https://github.com/enygma/behat-fuel-rest</a>
+</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Behat-rest-testing maintained by <a href="https://github.com/deminy">deminy</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
