@@ -33,8 +33,9 @@ file is located:
 
 ### 1. Set up and run REST API server.
 
-You can have a virtual host set up under Apache, with DOCUMENT ROOT set to "www/" of this repo. Alternatively, you may
-consider to use the [PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php):
+You can have a virtual host set up under Apache, with DocumentRoot set to "www/" of this repo and DirectoryIndex set
+to "router.php". Alternatively, you may consider to use the 
+[PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php):
 
 #### 1.1. Install PHP 5.4.
 

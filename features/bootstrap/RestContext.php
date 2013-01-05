@@ -26,9 +26,9 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class RestContext extends BehatContext implements ClosuredContextInterface
 {
 	const METHOD_DELETE = 'DELETE';
-	const METHOD_GET	= 'GET';
+	const METHOD_GET    = 'GET';
 	const METHOD_POST   = 'POST';
-	const METHOD_PUT	= 'PUT';
+	const METHOD_PUT    = 'PUT';
 
 	/**
 	 * @var array
@@ -241,7 +241,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 		{
 			if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$name))
 			{
-				throw new \Exception('Property "' . $name . '" is not set!');
+				throw new \Exception('Field "' . $name . '" is not set!');
 			}
 		}
 		else
@@ -253,22 +253,22 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 	/**
 	 * @Then /^field "([^"]+)" in the response should be "([^"]*)"$/
 	 */
-	public function valueOfTheFieldEquals($propertyName, $propertyValue)
+	public function valueOfTheFieldEquals($fieldName, $fieldValue)
 	{
 		if ($this->responseIsJson)
 		{
-			if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$propertyName))
+			if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$fieldName))
 			{
-				return new Step\Then(sprintf('the response should contain field "%s"', $propertyName));
+				return new Step\Then(sprintf('the response should contain field "%s"', $fieldName));
 			}
 
-			if ($this->responseData->$propertyName != $propertyValue)
+			if ($this->responseData->$fieldName != $fieldValue)
 			{
 				throw new \Exception(
 					sprintf(
-						'Property value mismatch! (given: "%s", match: "%s")',
-						$propertyValue,
-						$this->responseData->$propertyName
+						'Field value mismatch! (given: "%s", match: "%s")',
+						$fieldValue,
+						$this->responseData->$fieldName
 					)
 				);
 			}
@@ -284,25 +284,25 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 	 *
 	 * @todo Need to be better designed.
 	 */
-	public function typeOfTheFieldIs($propertyName, $type, $propertyValue)
+	public function typeOfTheFieldIs($fieldName, $type, $fieldValue)
 	{
 		if ($this->responseIsJson)
 		{
-			if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$propertyName))
+			if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$fieldName))
 			{
-				return new Step\Then(sprintf('the response should contain field "%s"', $propertyName));
+				return new Step\Then(sprintf('the response should contain field "%s"', $fieldName));
 			}
 
 			switch (strtolower($type))
 			{
 				case 'int':
 				case 'integer':
-					if (!preg_match('/^(0|[1-9]\d*)$/', $propertyValue))
+					if (!preg_match('/^(0|[1-9]\d*)$/', $fieldValue))
 					{
 						throw new \Exception(
 							sprintf(
-								'Property "%s"" is not of the correct type: %s!',
-								$propertyName,
+								'Field "%s"" is not of the correct type: %s!',
+								$fieldName,
 								$type
 							)
 						);

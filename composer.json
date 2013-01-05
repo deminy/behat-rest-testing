@@ -1,5 +1,5 @@
 {
-	"name": "deminy/behat-rest-testing",
+    "name": "deminy/behat-rest-testing",
     "require": {
         "behat/behat": "2.4.*@stable",
         "guzzle/guzzle": "3.0.*",
