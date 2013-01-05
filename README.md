@@ -36,8 +36,11 @@ curl -s http://getcomposer.org/installer | php && ./composer.phar install
 ### 1. Set up and run REST API server.
 
 You can have a virtual host set up under Apache, with DocumentRoot set to "www/" of this repo and DirectoryIndex set
-to "router.php". Alternatively, you may consider to use the 
-[PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php):
+to "router.php". Please make sure that module mod_rewrite is enabled, otherwise the REST server won't be able to handle
+requests properly. You may also need to update option "base_url" in the configuration file "behat.yml".
+
+Alternatively, you may consider to use the
+[PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php) following these steps:
 
 #### 1.1. Install PHP 5.4.
 
