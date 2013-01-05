@@ -1,6 +1,6 @@
 # Summary
 
-This repo is to help developers to easily understand how to do feature tests with Behat, how to start with writing
+This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing
 feature tests for REST APIs.
 
 This is based on [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a hard fork of 
@@ -27,7 +27,9 @@ repo name.
 You will need to download composer.phar and run the install command under the same directory where the 'composer.json'
 file is located:
 
-> curl -s http://getcomposer.org/installer | php && ./composer.phar install
+```
+curl -s http://getcomposer.org/installer | php && ./composer.phar install
+```
 
 # How to Test
 
@@ -41,18 +43,20 @@ to "router.php". Alternatively, you may consider to use the
 
 If you happen not have PHP 5.4, please download it and use following command to install it:
 
-> ./configure --prefix=/usr/local/php54
-> 
-> make
-> 
-> sudo make install
+```
+./configure --prefix=/usr/local/php54
+make
+sudo make install
+```
 
 #### 1.2. Start the REST API server.
 
 To start the [PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php), please
 run following command:
 
-> /usr/local/php54/bin/php -S localhost:8081 www/router.php
+```
+/usr/local/php54/bin/php -S localhost:8081 www/router.php
+```
 
 The web server now serves as the REST API server. You can visit URL http://localhost:8081 to see if the server runs
 properly or not (If everything is good, the URL should return string "OK" back).
@@ -64,11 +68,13 @@ properly or not (If everything is good, the URL should return string "OK" back).
 For the sample test provided, you can create the file by copying directly from file "behat.yml.dist" without any
 modifications required.
 
-#### 2.2. Start the REST API server.
+#### 2.2. Run the test command.
 
-Now, run following command to test sample features.
+Now, run following command to test sample features:
 
-> bin/behat
+```
+bin/behat
+```
 
 If everything is good, you should see the out as in following screenshot:
 
