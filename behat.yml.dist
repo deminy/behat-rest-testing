@@ -1,0 +1,22 @@
+# behat.yml
+# For more information on the configuration file behat.yml, please read http://docs.behat.org/guides/7.config.html
+# For more information on YAML file format, please read http://en.wikipedia.org/wiki/YAML
+
+default:
+    paths:
+        features: %behat.paths.base%/features       # You shouldn't need to change it unless you know what it is for
+        bootstrap: %behat.paths.features%/bootstrap # You shouldn't need to change it unless you know what it is for
+    filters:
+        # You may consider to defined tags on selected features/scenarios and put tag names here so that only scenarios
+        # with tags listed below will be tested.
+        # tags: "@basic"
+    context:
+        # In most cases, here is what you need to change for your projects.
+        parameters:
+            base_url: http://localhost:8081        # Base URL of your REST services
+            paths:
+                base:      %behat.paths.base%      # An absolute path under which closured step/hook definitions sit;
+                                                   # All following paths are relative to this base path.
+                bootstrap: features/bootstrap      # Not in use. Location to load more subcontext instances from.
+                steps:     features/steps          # Location to load closured step definitions from.
+                hooks:     features/support        # Location to load closured hook definitions from.
