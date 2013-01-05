@@ -17,6 +17,8 @@ the tests. Thus, both your project and this repo are separated from each other a
 Because of the heavy changes made above, instead of forking from Keith's repo directly, I created a new repo with same
 repo name.
 
+Pull requests are welcome.
+
 # Dependencies
 
 * [PHP](http://www.php.net) 5.3.0+
@@ -36,8 +38,11 @@ curl -s http://getcomposer.org/installer | php && ./composer.phar install
 ### 1. Set up and run REST API server.
 
 You can have a virtual host set up under Apache, with DocumentRoot set to "www/" of this repo and DirectoryIndex set
-to "router.php". Alternatively, you may consider to use the 
-[PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php):
+to "router.php". Please make sure that module mod_rewrite is enabled, otherwise the REST server won't be able to handle
+requests properly. You may also need to update option "base_url" in the configuration file "behat.yml".
+
+Alternatively, you may consider to use the
+[PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php) following these steps:
 
 #### 1.1. Install PHP 5.4.
 
@@ -76,7 +81,7 @@ Now, run following command to test sample features:
 bin/behat
 ```
 
-If everything is good, you should see the out as in following screenshot:
+If everything is good, you should see the output as in following screenshot:
 
 ![the output when running sample tests with Behat](/deminy/behat-rest-testing/blob/master/screenshot.png?raw=true "")
 
