@@ -1,6 +1,6 @@
 # Summary
 
-This repo is to help developers to easily understand how to do feature tests with Behat, how to start with writting
+This repo is to help developers to easily understand how to do feature tests with Behat, how to start with writing
 feature tests for REST APIs.
 
 This is based on [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a hard fork of 
@@ -33,7 +33,7 @@ file is located:
 
 ### 1. Set up and run REST API server.
 
-You can have a virtualhost set up under Apache, with DOCUMENT ROOT set to "www/" of this repo. Alternatively, you may
+You can have a virtual host set up under Apache, with DOCUMENT ROOT set to "www/" of this repo. Alternatively, you may
 consider to use the [PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php):
 
 #### 1.1. Install PHP 5.4.
@@ -58,6 +58,13 @@ properly or not (If everything is good, the URL should return string "OK" back).
 
 ### 2. Test the sample features.
 
+#### 2.1. Create the configuration file "behat.yml".
+
+For the sample test provided, you can create the file by copying directly from file "behat.yml.dist" without any
+modifications required.
+
+#### 2.2. Start the REST API server.
+
 Now, run following command to test sample features.
 
 > bin/behat
@@ -78,6 +85,8 @@ organize your files like this:
     src/
     tests/
         features/
+        	myProjectFeature.1.feature
+        	myProjectFeature.2.feature
             steps/
                 myProjectSteps.1.php
                 myProjectSteps.2.php
@@ -94,10 +103,12 @@ your REST APIs.
 
 # TODOs
 
+* Allow to add project-related .feature files outside the repo.
 * Support different environments (development, QA, staging, production, etc).
 
 # Known Limitations
 
+* Not allow to add project-related .feature files outside the repo.
 * The code may not work under Windows platforms.
 
 # Credits

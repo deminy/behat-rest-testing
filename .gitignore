@@ -1,9 +1,9 @@
+behat.yml
 bin
 composer.lock
 composer.phar
 vendor
 www/employees.txt
-.behat.yml
 .buildpath
 .project
 .settings
