@@ -83,7 +83,7 @@ bin/behat
 
 If everything is good, you should see the output as in following screenshot:
 
-![the output when running sample tests with Behat](/deminy/behat-rest-testing/blob/master/screenshot.png?raw=true "")
+![output when running Behat sample tests](https://raw.github.com/deminy/behat-rest-testing/master/screenshot.png "")
 
 # Create Feature Tests for Your Project
 
