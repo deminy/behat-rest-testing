@@ -31,10 +31,10 @@ function badRequest($message)
 	exit($message);
 }
 
-$file = dirname(__FILE__) . '/employees.txt';
+$file = __DIR__ . '/employees.txt';
 
 // Get all employees information.
-$data = file_get_contents($file);
+$data = is_readable(file) ? file_get_contents($file) : null;
 $employees = !empty($data) ? unserialize($data) : array();
 
 // Validate request URL.
