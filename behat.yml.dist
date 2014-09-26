@@ -20,3 +20,8 @@ default:
                 bootstrap: features/bootstrap      # Not in use. Location to load more subcontext instances from.
                 steps:     features/steps          # Location to load closured step definitions from.
                 hooks:     features/support        # Location to load closured hook definitions from.
+            subContexts:
+                # You may chain contexts with the main context (FeatureContext). In this way all the context classes
+                # may communicate with each other. Sub-contexts should be listed here in a way like:
+                # - FirstContext  # Please make sure you have file FirstContext.php available under /features/boostrap/
+                # - SecondContext # Please make sure you have file SecondContext.php available under /features/boostrap/

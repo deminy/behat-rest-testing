@@ -67,7 +67,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
             } else {
                 badRequest('Unsupported REST request.');
             }
-            file_put_contents('/tmp/1.txt', var_export($requestData, true) . "\n", FILE_APPEND);
         }
         break;
     default:
@@ -86,6 +85,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 'name' => array_key_exists('name', $requestData) ? $requestData['name'] : null,
                 'age'  => array_key_exists('age', $requestData) ? (int) $requestData['age'] : null,
             );
+            file_put_contents($file, serialize($employees));
         } else {
             badRequest('Unable to insert because the employee already exists.');
         }

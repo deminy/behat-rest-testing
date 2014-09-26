@@ -50,7 +50,7 @@ $steps->Given(
  * A demostration showing how to access sub-context and how to make assertions from under closured context.
  */
 $steps->Given(
-    '/^in the response there is no field called "([^"]*)"$/',
+    '/^in the response there should be no field called "([^"]*)"$/',
     function(FeatureContext $world, $fieldName) {
         $responseData = json_decode($world->getSubcontext('RestContext')->getResponse()->getBody(true));
         assertObjectNotHasAttribute($fieldName, $responseData);

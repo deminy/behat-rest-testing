@@ -29,6 +29,20 @@ class FeatureContext extends BehatContext
     public function __construct(array $parameters)
     {
         $this->useContext('RestContext', new RestContext($parameters));
+
+        /**
+         * You may chain other contexts as sub-contexts of this main context via parameters. In this way all the
+         * context classes may communicate with each other.
+         */
+        if (array_key_exists('subContexts', $parameters) && is_array($parameters['subContexts'])) {
+            foreach ($parameters['subContexts'] as $subContext) {
+                if (class_exists($subContext)) {
+                    $this->useContext($subContext, new $subContext());
+                } else {
+                    throw new \Exception("Context '{$subContext}' doesn't exist.");
+                }
+            }
+        }
     }
 
     /**
