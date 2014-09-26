@@ -21,8 +21,10 @@ Pull requests are welcome.
 
 # Dependencies
 
-* [PHP](http://www.php.net) 5.3.0+
+* [PHP](http://www.php.net) 5.3.3+
 * PHP extension [mbstring](http://www.php.net/mbstring) (used by [Behat](http://www.behat.org))
+* [PHPUnit](https://github.com/sebastianbergmann/phpunit): PHPUnit is used as an assertion tool.
+* [Guzzle](https://github.com/guzzle/guzzle): _Guzzle_ is used to make RESTful API calls.
 
 # Install
 
@@ -78,7 +80,7 @@ modifications required.
 Now, run following command to test sample features:
 
 ```
-bin/behat
+vendor/bin/behat
 ```
 
 If everything is good, you should see the output as in following screenshot:
@@ -110,7 +112,7 @@ organize your files like this:
 </pre>
 
 Your put your step/hook definitions under folder "/myProject/tests/features", and have paths defined in the
-configuration file "/behat-rest-testing/behat.yml". Then, you can call command "/behat-rest-testing/bin/behat" to test
+configuration file "/behat-rest-testing/behat.yml". Then, you can call command "/behat-rest-testing/vendor/bin/behat" to test
 your REST APIs.
 
 # TODOs

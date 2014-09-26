@@ -11,11 +11,11 @@ use Behat\Behat\Event\FeatureEvent;
  * @var Behat\Behat\Hook\Loader\ClosuredHookLoader $hooks
  */
 $hooks->BeforeFeature(
-	'',
-	function(FeatureEvent $event) {
-		$file = dirname(__FILE__) . '/../../www/employees.txt';
-		file_put_contents($file, '');
-	}
+    '',
+    function(FeatureEvent $event) {
+        $file = dirname(__FILE__) . '/../../www/employees.txt';
+        file_put_contents($file, '');
+    }
 );
 
 /**
@@ -24,9 +24,9 @@ $hooks->BeforeFeature(
  * @var Behat\Behat\Hook\Loader\ClosuredHookLoader $hooks
  */
 $hooks->AfterFeature(
-	'',
-	function(FeatureEvent $event) {
-		$file = dirname(__FILE__) . '/../../www/employees.txt';
-		file_put_contents($file, '');
-	}
+    '',
+    function(FeatureEvent $event) {
+        $file = dirname(__FILE__) . '/../../www/employees.txt';
+        file_put_contents($file, '');
+    }
 );

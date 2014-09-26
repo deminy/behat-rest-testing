@@ -1,11 +1,14 @@
 {
     "name": "deminy/behat-rest-testing",
     "require": {
+        "php": ">=5.3.3",
         "behat/behat": "2.4.*@stable",
-        "guzzle/guzzle": "3.0.*",
-        "phpunit/phpunit": "3.7.*"
+        "guzzlehttp/guzzle": "3.7.*",
+        "phpunit/phpunit": "4.2.*"
     },
-    "config": {
-        "bin-dir": "bin/"
+    "autoload" : {
+        "files" : [
+            "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+        ]
     }
 }
