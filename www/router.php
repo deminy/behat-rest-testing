@@ -34,7 +34,7 @@ function badRequest($message)
 $file = __DIR__ . '/employees.txt';
 
 // Get all employees information.
-$data = is_readable(file) ? file_get_contents($file) : null;
+$data = is_readable($file) ? file_get_contents($file) : null;
 $employees = !empty($data) ? unserialize($data) : array();
 
 // Validate request URL.
@@ -43,7 +43,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (in_array($_SERVER['REQUEST_URI'], array('', '/'))) {
             exit('OK');
         }
-        break;
+        // NOTE: no break statement here.
     case 'DELETE':
         if (!preg_match('#^/employee/(\d+)$#', $_SERVER['REQUEST_URI'], $matches)) {
             badRequest('Bad REST request.');
@@ -67,6 +67,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             } else {
                 badRequest('Unsupported REST request.');
             }
+            file_put_contents('/tmp/1.txt', var_export($requestData, true) . "\n", FILE_APPEND);
         }
         break;
     default:
@@ -82,19 +83,30 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         if (!array_key_exists($employeeId, $employees)) {
             $employees[$employeeId] = array(
-                'name' => $requestData['name'],
-                'age'  => (int) $requestData['age'],
+                'name' => array_key_exists('name', $requestData) ? $requestData['name'] : null,
+                'age'  => array_key_exists('age', $requestData) ? (int) $requestData['age'] : null,
             );
-            file_put_contents($file, serialize($employees));
         } else {
             badRequest('Unable to insert because the employee already exists.');
         }
         break;
     case 'PUT':
         if (array_key_exists($employeeId, $employees)) {
+            if (array_key_exists('name', $requestData)) {
+                $name = $requestData['name'];
+            } else {
+                $name = array_key_exists('name', $employees[$employeeId]) ? $employees[$employeeId]['name'] : null;
+            }
+
+            if (array_key_exists('age', $requestData)) {
+                $age = (int) $requestData['age'];
+            } else {
+                $age = array_key_exists('age', $employees[$employeeId]) ? $employees[$employeeId]['age'] : null;
+            }
+
             $employees[$employeeId] = array(
-                'name' => $requestData['name'],
-                'age'  => (int) $requestData['age'],
+                'name' => $name,
+                'age'  => $age,
             );
             file_put_contents($file, serialize($employees));
         } else {
