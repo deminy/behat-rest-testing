@@ -202,12 +202,10 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     }
 
     /**
-     * This public method is also for other context(s) to process REST API call and inject JSON response into this context.
-     *
      * @param string $jsonData
      * @return void
      */
-    public function processResponseBody($jsonData)
+    protected function processResponseBody($jsonData)
     {
         try {
             $this->responseData = $this->decodeJson($jsonData);

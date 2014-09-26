@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+@see http://pear.php.net/manual/en/package.php.php-codesniffer.annotated-ruleset.php
+-->
+<ruleset name="Coding Standard for Behat-Rest-Testing">
+
+    <description>Custimized PSR2 coding standard for Behat-Rest-Testing</description>
+
+    <rule ref="PSR2" />
+
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>features/bootstrap/*Context.php</exclude-pattern>
+    </rule>
+
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>features/bootstrap/FeatureContext.php</exclude-pattern>
+        <exclude-pattern>features/steps/sample_steps.php</exclude-pattern>
+        <exclude-pattern>www/router.php</exclude-pattern>
+    </rule>
+
+</ruleset>
