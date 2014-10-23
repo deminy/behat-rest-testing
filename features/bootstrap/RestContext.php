@@ -69,7 +69,8 @@ class RestContext extends BehatContext implements ClosuredContextInterface
      * Initializes context.
      * Every scenario gets it's own context object.
      *
-     * @param   array  $parameters  Context parameters (set them up through behat.yml)
+     * @param array $parameters Context parameters (set them up through behat.yml)
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $parameters)
     {
@@ -78,15 +79,13 @@ class RestContext extends BehatContext implements ClosuredContextInterface
         }
 
         $this->parameters = $parameters;
-        $this->client	  = new Guzzle\Service\Client;
+        $this->client     = new Guzzle\Service\Client;
     }
 
     /**
      * Returns array of step definition files (*.php).
      *
      * @return array
-     *
-     * @throws \RuntimeException
      */
     public function getStepDefinitionResources()
     {
@@ -99,7 +98,6 @@ class RestContext extends BehatContext implements ClosuredContextInterface
      * Returns array of hook definition files (*.php).
      *
      * @return array
-     *
      * @throws \RuntimeException
      */
     public function getHookDefinitionResources()
@@ -111,6 +109,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Given /^that I want to (delete|remove) an? /
+     * @return void
      */
     public function thatIWantToDelete()
     {
@@ -119,6 +118,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Given /^that I want to ((find|look for) an?|check) /
+     * @return void
      */
     public function thatIWantToFind()
     {
@@ -127,6 +127,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Given /^that I want to (add|create|make) an? (new )?/
+     * @return void
      */
     public function thatIWantToMakeANew()
     {
@@ -135,6 +136,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Given /^that I want to (change|update) (an?|that) /
+     * @return void
      */
     public function thatIWantToUpdate()
     {
@@ -143,6 +145,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @When /^I request "([^"]*)"$/
+     * @param string $pageUrl
+     * @return void
+     * @throws \Exception
      */
     public function iRequest($pageUrl)
     {
@@ -256,6 +261,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Given /^the response should contain field "([^"]*)"$/
+     * @param string $name
+     * @return void
+     * @throws \Exception
      */
     public function theResponseHasAField($name)
     {
@@ -270,6 +278,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Then /^in the response there is no field called "([^"]*)"$/
+     * @param string $name
+     * @return void
+     * @throws \Exception
      */
     public function theResponseShouldNotHaveAField($name)
     {
@@ -284,6 +295,10 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Then /^field "([^"]+)" in the response should be "([^"]*)"$/
+     * @param string $fieldName
+     * @param string $fieldValue
+     * @return void
+     * @throws \Exception
      */
     public function valueOfTheFieldEquals($fieldName, $fieldValue)
     {
@@ -308,6 +323,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Then /^the response should contain "([^"]*)"$/
+     * @param string $str
+     * @return void
+     * @throws \Exception
      */
     public function theResponseShouldContain($str)
     {
@@ -322,7 +340,11 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Then /^field "([^"]+)" in the response should be an? (int|integer) "([^"]*)"$/
-     *
+     * @param string $fieldName
+     * @param string $type
+     * @param string $fieldvalue
+     * @return void
+     * @throws \Exception
      * @todo Need to be better designed.
      */
     public function fieldIsOfTypeWithValue($fieldName, $type, $fieldValue)
@@ -357,6 +379,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Then /^the response status code should be (\d+)$/
+     * @param int $httpStatus
+     * @return void
+     * @throws \Exception
      */
     public function theResponseStatusCodeShouldBe($httpStatus)
     {
@@ -373,6 +398,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Given /^the response should be "([^"]*)"$/
+     * @param string $string
+     * @return void
+     * @throws \Exception
      */
     public function theResponseShouldBe($string)
     {
@@ -387,6 +415,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * @Then /^echo last response$/
+     * @return void
      */
     public function echoLastResponse()
     {
@@ -432,9 +461,8 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     /**
      * Get context parameter.
      *
-     * @param   string  $name  Parameter name.
-     *
-     * @return  mixed
+     * @param string $name Parameter name.
+     * @return mixed
      */
     protected function getParameter($name)
     {
@@ -444,10 +472,8 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     /**
      * Returns path that points to specified resources.
      *
-     * @param   string  $type  Resource type. Either 'boostrap', 'steps' or 'hooks'.
-     *
+     * @param string $type Resource type. Either 'boostrap', 'steps' or 'hooks'.
      * @return string Return path back, or NULL if not defined.
-     *
      * @throws \RuntimeException
      */
     protected function getResourcePath($type)
@@ -479,11 +505,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     /**
      * Get files of certain type under specified directory.
      *
-     * @param   string  $dir  A directory.
-     * @param   string  $ext  File extension.
-     *
-     * @return  array
-     *
+     * @param string $dir A directory.
+     * @param string $ext File extension.
+     * @return array
      * @throws \InvalidArgumentException
      */
     protected function getFiles($dir, $ext = 'php')
@@ -510,12 +534,10 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     /**
      * Decode JSON string.
      *
-     * @param   string  $string  A JSON string.
-     *
-     * @return  mixed
-     *
-     * @see http://www.php.net/json_last_error
+     * @param string $string A JSON string.
+     * @return mixed
      * @throws \Exception
+     * @see http://www.php.net/json_last_error
      */
     protected function decodeJson($string)
     {

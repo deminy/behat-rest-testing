@@ -24,7 +24,8 @@ class FeatureContext extends BehatContext
      * Initializes context.
      * Every scenario gets it's own context object.
      *
-     * @param   array  $parameters  Context parameters (set them up through behat.yml)
+     * @param array $parameters Context parameters (set them up through behat.yml)
+     * @throws \Exception
      */
     public function __construct(array $parameters)
     {
@@ -48,10 +49,8 @@ class FeatureContext extends BehatContext
     /**
      * Get data by field name, or return all data if no field name provided.
      *
-     * @param   string  $name  Field name.
-     *
-     * @return  mixed
-     *
+     * @param string $name Field name.
+     * @return mixed
      * @throws \Exception
      */
     public function getData($name = null)
@@ -68,10 +67,9 @@ class FeatureContext extends BehatContext
     /**
      * Set value on given field name.
      *
-     * @param   string  $name   Field name.
-     * @param   mixed   $value  Field value.
-     *
-     * @return  void
+     * @param string $name Field name.
+     * @param mixed $value Field value.
+     * @return void
      */
     public function setData($name, $value)
     {
@@ -81,9 +79,8 @@ class FeatureContext extends BehatContext
     /**
      * Check if specified field name exists or not.
      *
-     * @param   string  $name  Field name.
-     *
-     * @return  mixed
+     * @param string $name Field name.
+     * @return mixed
      */
     public function dataExists($name)
     {
