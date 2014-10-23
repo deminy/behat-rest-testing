@@ -44,11 +44,12 @@ to "router.php". Please make sure that module mod_rewrite is enabled, otherwise 
 requests properly. You may also need to update option "base_url" in the configuration file "behat.yml".
 
 Alternatively, you may consider to use the
-[PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php) following these steps:
+[PHP 5.4+ built-in web server](http://php.net/manual/en/features.commandline.webserver.php) following these steps:
 
-#### 1.1. Install PHP 5.4.
+#### 1.1. Install PHP 5.4+.
 
-If you happen not have PHP 5.4, please download it and use following command to install it:
+If you happen not have PHP 5.4+, please download it and use following command to install it (Here I assume you use PHP
+5.4):
 
 ```
 ./configure --prefix=/usr/local/php54
@@ -58,8 +59,8 @@ sudo make install
 
 #### 1.2. Start the REST API server.
 
-To start the [PHP 5.4 built-in web server](http://php.net/manual/en/features.commandline.webserver.php), please
-run following command:
+To start the [PHP 5.4+ built-in web server](http://php.net/manual/en/features.commandline.webserver.php), please
+run command similar to following:
 
 ```
 /usr/local/php54/bin/php -S localhost:8081 www/router.php
