@@ -57,7 +57,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             badRequest('Bad REST request.');
         } else {
             /**
-             * For PUT requests, variable $_REQUEST might always be empty when using PHP 5.4 built-in web server.
+             * For PUT requests, variable $_REQUEST might always be empty when using PHP 5.4+ built-in web server.
              */
             $rawRequestData = file_get_contents('php://input');
 
