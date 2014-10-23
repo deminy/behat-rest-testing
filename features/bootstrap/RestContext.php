@@ -182,61 +182,76 @@ class RestContext extends BehatContext implements ClosuredContextInterface
         } catch (ServerErrorResponseException $e) {
             $this->response = $e->getResponse();
         }
-
-        $this->processResponse();
     }
 
     /**
      * This public method is also for other context(s) to process REST API call and inject response into this context.
      *
-     * @param \Guzzle\Http\Message\Response $response
+     * @param \Guzzle\Http\Message\Response $response You may use this parameter to inject modified responses from other
+     *                                                context.
+     * @param boolean $asJson Process the response as JSON or not.
      * @return void
      */
-    public function processResponse(\Guzzle\Http\Message\Response $response = null)
+    public function processResponse(\Guzzle\Http\Message\Response $response = null, $asJson = true)
     {
-        if ($response) {
+        if (!empty($response)) {
             $this->response = $response;
         }
 
-        return $this->processResponseBody($this->response->getBody(true));
+        return $this->processResponseBody($this->response->getBody(true), $asJson);
     }
 
     /**
+     * Process response body. This method may also be used by other context(s) to process REST API call and inject
+     * response body into this context.
+     *
      * @param string $jsonData
      * @return void
      */
-    protected function processResponseBody($jsonData)
+    protected function processResponseBody($jsonData, $asJson = true)
     {
-        try {
-            $this->responseData = $this->decodeJson($jsonData);
-            $this->responseIsJson = true;
-        } catch (\Exception $e) {
-            $this->responseData = $jsonData;
-            $this->responseIsJson = false;
-            $this->responseDecodeException = $e;
+        if ($asJson) {
+            try {
+                $this->responseData            = $this->decodeJson($jsonData);
+                $this->responseIsJson          = true;
+                $this->responseDecodeException = null;
+            } catch (\Exception $e) {
+                $this->responseData            = $jsonData;
+                $this->responseIsJson          = false;
+                $this->responseDecodeException = $e;
+            }
+        } else {
+            $this->responseData            = $jsonData;
+            $this->responseIsJson          = false;
+            $this->responseDecodeException = null;
         }
     }
 
     /**
-     * @Then /^the response is JSON$/
+     * @Then /^the response is( not)? JSON$/
+     * @param string $notJson
+     * @return void
+     * @throws \Exception
      */
-    public function theResponseIsJson()
+    public function theResponseIsJson($notJson = '')
     {
-        if (!$this->responseIsJson) {
-            throw new \Exception(
-                "Response was not JSON\n" . $this->responseDecodeException->getMessage() . "\n" . $this->response
-            );
-        }
-    }
+        $this->processResponse();
 
-    /**
-     * @Then /^the response is not JSON$/
-     */
-    public function theResponseIsNotJson()
-    {
-        if ($this->responseIsJson) {
-            throw new \Exception("Response was JSON\n" . $this->response);
+        if (strpos($notJson, 'not') === false) {
+            if (!$this->responseIsJson) {
+                $message = "Response was not JSON\n";
+                if (!empty($this->responseDecodeException)) {
+                    $message .= $this->responseDecodeException->getMessage();
+                }
+
+                throw new \Exception($message . "\n" . $this->response);
+            }
+        } else {
+            if ($this->responseIsJson) {
+                throw new \Exception("Response was JSON\n" . $this->response);
+            }
         }
+
     }
 
     /**
