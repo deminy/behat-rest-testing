@@ -6,6 +6,19 @@
  */
 use Behat\Behat\Context\BehatContext;
 
+/**
+ * Use PHPUnit as assertion tool.
+ */
+$phpunitAssertion = false;
+if (!empty($vendorDir)) {
+    $assertFile = $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php';
+
+    if (is_readable($assertFile)) {
+        $phpunitAssertion = true;
+        include_once $assertFile;
+    }
+}
+
 require_once 'RestContext.php';
 
 /**
