@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.3.3",
         "behat/behat": "2.4.*",
-        "guzzlehttp/guzzle": "3.7.*",
+        "guzzle/guzzle": "3.9.*",
         "phpunit/phpunit": "4.2.*"
     },
     "autoload" : {
