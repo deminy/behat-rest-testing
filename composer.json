@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "behat/behat": "~2.4.0",
+        "behat/behat": "~2.5.0",
         "guzzle/guzzle": "~3.9.0",
         "phpunit/phpunit": "~4.3.0"
     },
