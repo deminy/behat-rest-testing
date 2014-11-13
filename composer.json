@@ -1,5 +1,19 @@
 {
     "name": "deminy/behat-rest-testing",
+    "description": "Demo on how to do feature tests with Behat and how to start writing feature tests for REST APIs.",
+    "keywords": [
+        "PHP",
+        "Behat",
+        "REST"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Demin Yin",
+            "email": "deminy@deminy.net",
+            "homepage": "http://deminy.net"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "behat/behat": "2.4.*@stable",
