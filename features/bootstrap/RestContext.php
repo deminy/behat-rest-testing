@@ -56,6 +56,13 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     protected $responseData;
 
     /**
+     * Specifies if the response data should be an associative array or a nested stdClass object hierarchy.
+     *
+     * @var bool
+     */
+    protected $associative;
+
+    /**
      * @var boolean
      */
     protected $responseIsJson;
@@ -78,8 +85,9 @@ class RestContext extends BehatContext implements ClosuredContextInterface
             throw new \InvalidArgumentException('Parameters not loaded!');
         }
 
-        $this->parameters = $parameters;
-        $this->client     = new Guzzle\Service\Client;
+        $this->parameters  = $parameters;
+        $this->client      = new Guzzle\Service\Client;
+        $this->associative = $this->getParameter('associative');
     }
 
     /**
@@ -208,9 +216,10 @@ class RestContext extends BehatContext implements ClosuredContextInterface
 
     /**
      * Process response body. This method may also be used by other context(s) to process REST API call and inject
-     * response body into this context.
+     * response body into this context by using 2nd parameter $asJson.
      *
      * @param string $jsonData
+     * @param boolean $asJson
      * @return void
      */
     protected function processResponseBody($jsonData, $asJson = true)
@@ -268,8 +277,14 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     public function theResponseHasAField($name)
     {
         if ($this->responseIsJson) {
-            if (!($this->responseData instanceof stdClass) || !property_exists($this->responseData, $name)) {
-                throw new \Exception('Field "' . $name . '" is not set!');
+            if ($this->associative) {
+                if (!(is_array($this->responseData)) || !array_key_exists($name, $this->responseData)) {
+                    throw new \Exception('Field "' . $name . '" is not set!');
+                }
+            } else {
+                if (!($this->responseData instanceof stdClass) || !property_exists($this->responseData, $name)) {
+                    throw new \Exception('Field "' . $name . '" is not set!');
+                }
             }
         } else {
             return new Step\Then('the response is JSON');
@@ -285,8 +300,14 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     public function theResponseShouldNotHaveAField($name)
     {
         if ($this->responseIsJson) {
-            if (($this->responseData instanceof stdClass) && property_exists($this->responseData, $name)) {
-                throw new \Exception('Field "' . $name . '" should not be there!');
+            if ($this->associative) {
+                if (is_array($this->responseData) && array_key_exists($name, $this->responseData)) {
+                    throw new \Exception('Field "' . $name . '" should not be there!');
+                }
+            } else {
+                if (($this->responseData instanceof stdClass) && property_exists($this->responseData, $name)) {
+                    throw new \Exception('Field "' . $name . '" should not be there!');
+                }
             }
         } else {
             return new Step\Then('the response is JSON');
@@ -303,18 +324,28 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     public function valueOfTheFieldEquals($fieldName, $fieldValue)
     {
         if ($this->responseIsJson) {
-            if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$fieldName)) {
-                return new Step\Then(sprintf('the response should contain field "%s"', $fieldName));
-            }
-
-            if ($this->responseData->$fieldName != $fieldValue) {
-                throw new \Exception(
-                    sprintf(
-                        'Field value mismatch! (given: "%s", match: "%s")',
-                        $fieldValue,
-                        $this->responseData->$fieldName
-                    )
-                );
+            if (new Step\Given("the response should contain field \"{$fieldName}\"")) {
+                if ($this->associative) {
+                    if ($this->responseData[$fieldName] != $fieldValue) {
+                        throw new \Exception(
+                            sprintf(
+                                'Field value mismatch! (given: "%s", match: "%s")',
+                                $fieldValue,
+                                $this->responseData[$fieldName]
+                            )
+                        );
+                    }
+                } else {
+                    if ($this->responseData->$fieldName != $fieldValue) {
+                        throw new \Exception(
+                            sprintf(
+                                'Field value mismatch! (given: "%s", match: "%s")',
+                                $fieldValue,
+                                $this->responseData->$fieldName
+                            )
+                        );
+                    }
+                }
             }
         } else {
             return new Step\Then('the response is JSON');
@@ -342,7 +373,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
      * @Then /^field "([^"]+)" in the response should be an? (int|integer) "([^"]*)"$/
      * @param string $fieldName
      * @param string $type
-     * @param string $fieldvalue
+     * @param string $fieldValue
      * @return void
      * @throws \Exception
      * @todo Need to be better designed.
@@ -350,27 +381,25 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     public function fieldIsOfTypeWithValue($fieldName, $type, $fieldValue)
     {
         if ($this->responseIsJson) {
-            if (!($this->responseData instanceof stdClass) || !isset($this->responseData->$fieldName)) {
-                return new Step\Then(sprintf('the response should contain field "%s"', $fieldName));
-            }
-
-            switch (strtolower($type)) {
-                case 'int':
-                case 'integer':
-                    if (!preg_match('/^(0|[1-9]\d*)$/', $fieldValue)) {
-                        throw new \Exception(
-                            sprintf(
-                                'Field "%s" is not of the correct type: %s!',
-                                $fieldName,
-                                $type
-                            )
-                        );
-                    }
-                    // TODO: We didn't check if the value is as expected here.
-                    break;
-                default:
-                    throw new \Exception('Unsupported data type: ' . $type);
-                    break;
+            if (new Step\Given("the response should contain field \"{$fieldName}\"")) {
+                switch (strtolower($type)) {
+                    case 'int':
+                    case 'integer':
+                        if (!preg_match('/^(0|[1-9]\d*)$/', $fieldValue)) {
+                            throw new \Exception(
+                                sprintf(
+                                    'Field "%s" is not of the correct type: %s!',
+                                    $fieldName,
+                                    $type
+                                )
+                            );
+                        }
+                        // TODO: We didn't check if the value is as expected here.
+                        break;
+                    default:
+                        throw new \Exception('Unsupported data type: ' . $type);
+                        break;
+                }
             }
         } else {
             return new Step\Then('the response is JSON');
@@ -541,7 +570,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
      */
     protected function decodeJson($string)
     {
-        $json = json_decode($string);
+        $json = json_decode($string, $this->associative);
 
         switch (json_last_error()) {
             case JSON_ERROR_NONE:
