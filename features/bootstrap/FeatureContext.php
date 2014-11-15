@@ -1,6 +1,5 @@
 <?php
 /**
- * @author   Taylor Otwell <taylorotwell@gmail.com>
  * @author   Demin Yin <deminy@deminy.net>
  * @license  MIT license
  */
