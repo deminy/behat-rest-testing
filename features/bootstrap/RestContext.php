@@ -6,27 +6,20 @@
  */
 
 use Behat\Behat\Context\BehatContext;
-use Behat\Behat\Context\ClosuredContextInterface;
 use Behat\Behat\Context\Step;
 use Guzzle\Http\Url;
 use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\Exception\ServerErrorResponseException;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Rest context.
  */
-class RestContext extends BehatContext implements ClosuredContextInterface
+class RestContext extends BehatContext
 {
     const METHOD_DELETE = 'DELETE';
     const METHOD_GET    = 'GET';
     const METHOD_POST   = 'POST';
     const METHOD_PUT    = 'PUT';
-
-    /**
-     * @var array
-     */
-    protected $parameters;
 
     /**
      * @var Guzzle\Service\Client
@@ -77,42 +70,11 @@ class RestContext extends BehatContext implements ClosuredContextInterface
      * Every scenario gets it's own context object.
      *
      * @param array $parameters Context parameters (set them up through behat.yml)
-     * @throws \InvalidArgumentException
      */
     public function __construct(array $parameters)
     {
-        if (empty($parameters)) {
-            throw new \InvalidArgumentException('Parameters not loaded!');
-        }
-
-        $this->parameters  = $parameters;
         $this->client      = new Guzzle\Service\Client;
-        $this->associative = $this->getParameter('associative');
-    }
-
-    /**
-     * Returns array of step definition files (*.php).
-     *
-     * @return array
-     */
-    public function getStepDefinitionResources()
-    {
-        $path = $this->getResourcePath('steps') ?: (__DIR__ . '/../steps');
-
-        return $this->getFiles($path);
-    }
-
-    /**
-     * Returns array of hook definition files (*.php).
-     *
-     * @return array
-     * @throws \RuntimeException
-     */
-    public function getHookDefinitionResources()
-    {
-        $path = $this->getResourcePath('hooks') ?: (__DIR__ . '/../support');
-
-        return $this->getFiles($path);
+        $this->associative = (array_key_exists('associative', $parameters) ? $parameters['associative'] : true);
     }
 
     /**
@@ -162,7 +124,7 @@ class RestContext extends BehatContext implements ClosuredContextInterface
         $this->responseData = $this->responseDecodeException = null;
         $this->responseIsJson = false;
 
-        $url = Url::factory($this->getParameter('base_url'))->combine($pageUrl);
+        $url = Url::factory($this->getMainContext()->getParameter('base_url'))->combine($pageUrl);
 
         switch (strtoupper($this->requestMethod)) {
             case self::METHOD_GET:
@@ -473,91 +435,6 @@ class RestContext extends BehatContext implements ClosuredContextInterface
     public function getResponseData()
     {
         return $this->responseData;
-    }
-
-    /**
-     * This public method is also for other context(s) to set parameter(s) into this context.
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return void
-     */
-    public function setParameter($name, $value)
-    {
-        $this->parameters[$name] = $value;
-    }
-
-    /**
-     * Get context parameter.
-     *
-     * @param string $name Parameter name.
-     * @return mixed
-     */
-    protected function getParameter($name)
-    {
-        return array_key_exists($name, $this->parameters) ? $this->parameters[$name] : null;
-    }
-
-    /**
-     * Returns path that points to specified resources.
-     *
-     * @param string $type Resource type. Either 'boostrap', 'steps' or 'hooks'.
-     * @return string Return path back, or NULL if not defined.
-     * @throws \RuntimeException
-     */
-    protected function getResourcePath($type)
-    {
-        $paths = $this->getParameter('paths');
-
-        if (array_key_exists($type, $paths)) {
-            $pathBase = array_key_exists('base', $paths) ? $paths['base'] : '';
-            $pathType = $paths[$type];
-
-            // Check if it's an absolute path.
-            if (substr($pathType, 0, 1) == '/') {
-                if (empty($pathBase)) {
-                    return $pathType;
-                } else {
-                    throw new \RuntimeException(
-                        sprintf('You may only use relative path for type "%s" when base path is presented.', $type)
-                    );
-                }
-            } else {
-                // TODO: check if there is a trailing directory separator in the base path.
-                return $paths['base'] . '/' . $pathType;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Get files of certain type under specified directory.
-     *
-     * @param string $dir A directory.
-     * @param string $ext File extension.
-     * @return array
-     * @throws \InvalidArgumentException
-     */
-    protected function getFiles($dir, $ext = 'php')
-    {
-        if (!is_dir($dir)) {
-            throw new \InvalidArgumentException(sprintf('Given path "%s" is not a directory.', $dir));
-        }
-
-        if (!is_readable($dir)) {
-            throw new \InvalidArgumentException(sprintf('Given path "%s" is not readable.', $dir));
-        }
-
-        if (!preg_match('/^[0-9a-z]+$/i', $ext)) {
-            throw new \InvalidArgumentException(
-                sprintf('Given file extension "%s" is invalid (may only contain digits and/or letters).', $dir)
-            );
-        }
-
-        $finder = new Finder;
-
-        return $finder->files()->name('*.' . $ext)->in($dir);
     }
 
     /**
