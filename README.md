@@ -20,7 +20,7 @@ via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
 * [PHPUnit](https://github.com/sebastianbergmann/phpunit): PHPUnit is used as an assertion tool.
 * [Guzzle](https://github.com/guzzle/guzzle): _Guzzle_ is used to make RESTful API calls.
 
-# Install
+# Installation - Source
 
 You will need to download composer.phar and run the install command under the same directory where the 'composer.json'
 file is located:
@@ -28,6 +28,23 @@ file is located:
 ```
 curl -s http://getcomposer.org/installer | php && ./composer.phar install
 ```
+
+# Installation - Composer
+
+You may also install using [Composer](https://github.com/composer/composer) if you want to use this repo in your own
+project.
+
+Step 1. Add the repo as a dependency.
+
+You'll usually want this as a development dependency, so the example shows it in the require-dev section.
+
+``` json
+"require-dev": {
+    "deminy/behat-rest-testing": "@dev"
+}
+```
+
+Step 2. Run Composer: `php composer.phar install --dev` or `php composer.phar update phake/phake`
 
 # How to Test
 
