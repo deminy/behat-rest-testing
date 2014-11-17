@@ -46,12 +46,13 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface
      * Every scenario gets it's own context object.
      *
      * @param array $parameters Context parameters (set them up through behat.yml)
+     * @throws \InvalidArgumentException
      * @throws \Exception
      */
     public function __construct(array $parameters)
     {
         if (empty($parameters)) {
-            throw new \InvalidArgumentException('Parameters not loaded!');
+            throw new \InvalidArgumentException('Parameters not loaded.');
         }
 
         $this->parameters = $parameters;
@@ -242,7 +243,7 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface
         ;
 
         foreach ($iterator as $file) {
-            require_once((string) $file);
+            include_once (string) $file;
         }
     }
 }
