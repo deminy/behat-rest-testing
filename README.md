@@ -44,7 +44,7 @@ You'll usually want this as a development dependency, so the example shows it in
 }
 ```
 
-Step 2. Run Composer: `php composer.phar install --dev` or `php composer.phar update phake/phake`
+Step 2. Run Composer: `php composer.phar install --dev` or `php composer.phar update deminy/behat-rest-testing`
 
 # How to Test
 
