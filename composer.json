@@ -19,5 +19,10 @@
         "behat/behat": "~2.5.0",
         "guzzle/guzzle": "~3.9.0",
         "phpunit/phpunit": "~4.3.0"
+    },
+    "autoload-dev" : {
+        "files" : [
+            "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+        ]
     }
 }

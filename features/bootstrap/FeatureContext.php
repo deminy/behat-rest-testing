@@ -4,19 +4,6 @@
  * @license  MIT license
  */
 
-/**
- * Use PHPUnit as assertion tool.
- */
-$phpunitAssertion = false;
-if (!empty($vendorDir)) {
-    $assertFile = $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php';
-
-    if (is_readable($assertFile)) {
-        $phpunitAssertion = true;
-        include_once $assertFile;
-    }
-}
-
 use Behat\Behat\Context\ClosuredContextInterface;
 use Behat\Behat\Context\BehatContext;
 use Symfony\Component\Finder\Finder;
