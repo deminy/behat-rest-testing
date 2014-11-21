@@ -17,8 +17,6 @@ via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
 
 * [PHP](http://www.php.net) 5.3.3+
 * PHP extension [mbstring](http://www.php.net/mbstring) (used by [Behat](http://www.behat.org))
-* [PHPUnit](https://github.com/sebastianbergmann/phpunit): PHPUnit is used as an assertion tool.
-* [Guzzle](https://github.com/guzzle/guzzle): _Guzzle_ is used to make RESTful API calls.
 
 # Installation - Source
 
