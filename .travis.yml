@@ -8,4 +8,4 @@ before_script:
   - php -S localhost:8081 www/router.php &
   - sleep 4
 script:
-    - vendor/bin/behat
+  - vendor/bin/behat
