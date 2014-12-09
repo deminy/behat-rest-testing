@@ -166,5 +166,5 @@ cd /path-to-your-project; cd tests;
 
 # Credits
 
-* Keith Loy's work at <https://github.com/kloy/behat-rest-testing>
-* Chris Cornutt's work at <https://github.com/enygma/behat-fuel-rest>
+* [Keith Loy's work](https://github.com/kloy/behat-rest-testing)
+* [Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)
