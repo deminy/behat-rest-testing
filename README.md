@@ -1,4 +1,8 @@
 # Summary
+[![Build Status](https://travis-ci.org/deminy/behat-rest-testing.svg?branch=master)](https://travis-ci.org/deminy/behat-rest-testing)
+[![Latest Stable Version](https://poser.pugx.org/deminy/behat-rest-testing/v/stable.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
+[![Latest Unstable Version](https://poser.pugx.org/deminy/behat-rest-testing/v/unstable.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
+[![License](https://poser.pugx.org/deminy/behat-rest-testing/license.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
 
 This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing
 feature tests for REST APIs.
