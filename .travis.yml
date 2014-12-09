@@ -1,0 +1,11 @@
+language: php
+php:
+  - 5.6
+  - 5.5
+  - 5.4
+before_script:
+  - composer install --no-interaction --prefer-source
+  - php -S localhost:8081 www/router.php &
+  - sleep 4
+script:
+    - vendor/bin/behat
