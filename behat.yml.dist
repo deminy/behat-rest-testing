@@ -29,8 +29,8 @@ default:
             subContexts:
                 # You may chain contexts with the main context (FeatureContext). In this way all the context classes
                 # may communicate with each other. Sub-contexts should be listed here in a way like:
-                # - FirstContext  # Please make sure you have file FirstContext.php available under /features/boostrap/
-                # - SecondContext # Please make sure you have file SecondContext.php available under /features/boostrap/
+                # - FirstContext  # Please make sure you have file FirstContext.php available under /features/bootstrap/
+                # - SecondContext # Please make sure you have file SecondContext.php available under /features/bootstrap/
             associative:
                 true  # Boolean "true" or "false". Specifies If JSON response should be decoded to an associative array
                       # or a nested stdClass object hierarchy.  This is helpful when some of your JSON responses cannot
