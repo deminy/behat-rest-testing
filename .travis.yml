@@ -8,7 +8,8 @@ env:
   - BEHAT_VERSION="2.5.*"
 install:
   - composer require behat/behat:${BEHAT_VERSION}
-  - composer install -v --no-interaction --prefer-source
+  - composer install --no-interaction --prefer-source
+  - composer show -i
 before_script:
   - php -S localhost:8081 www/router.php &
   - sleep 4
