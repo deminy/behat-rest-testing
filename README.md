@@ -4,18 +4,15 @@
 [![Latest Unstable Version](https://poser.pugx.org/deminy/behat-rest-testing/v/unstable.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
 [![License](https://poser.pugx.org/deminy/behat-rest-testing/license.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
 
-This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing
-feature tests for REST APIs.
+This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing feature
+tests for REST APIs, with following features included:
 
-This was based on [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a hard fork of
-[Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)), with various major changes:
-
+* Core contexts/steps for testing REST APIs.
+* Sample RESTful services, and sample feature tests against the services.
+* Samples for closured steps.
+* Samples for closured hooks.
 * Best of all: To start writing feature tests for the project you are working on, you may use this repo in your project
 via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
-* Added sample RESTful services, and changed/added features to test against the services.
-* Added samples for closured steps.
-* Added samples for closured hooks.
-* Removed anything related to PHP framework [Laravel](http://laravel.com/).
 
 # Dependencies
 
@@ -166,5 +163,5 @@ cd /path-to-your-project; cd tests;
 
 # Credits
 
-* [Keith Loy's work](https://github.com/kloy/behat-rest-testing)
-* [Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)
+* This repository was started from [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a
+hard fork of [Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)), with major refactors/changes.
