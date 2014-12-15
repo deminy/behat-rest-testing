@@ -17,6 +17,8 @@ via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
 # Dependencies
 
 * [PHP](http://www.php.net) 5.3.3+
+* [Behat](https://github.com/Behat/Behat) >=2.4.0, <=3.0.0. As of now this repository doesn't yet support Behat 3.0.0+
+due to incompatible API changes in Behat.
 * PHP extension [mbstring](http://www.php.net/mbstring) (used by [Behat](http://www.behat.org))
 
 # Installation - Source
@@ -165,3 +167,7 @@ cd /path-to-your-project; cd tests;
 
 * This repository was started from [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a
 hard fork of [Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)), with major refactors/changes.
+
+# License
+
+MIT license.
