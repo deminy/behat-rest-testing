@@ -35,26 +35,21 @@ curl -s http://getcomposer.org/installer | php && ./composer.phar install
 You may also install using [Composer](https://github.com/composer/composer) if you want to use this repo in your own
 project.
 
-Step 1. Add the repo as a dependency.
-
-You'll usually want this as a development dependency, so the example shows it. Please note that you have to explicitly
-include the _PHPUnit_ file _Functions.php_ explicitly since we use it as an assertion tool.
+Step 1. Add the repo as a dependency. Please note that you have to explicitly include the _PHPUnit_ file _Functions.php_
+explicitly since we use it as an assertion tool.
 
 ``` json
-"require-dev": {
-    "deminy/behat-rest-testing": "@dev"
+"require": {
+    "deminy/behat-rest-testing": "~1.0.0"
 },
-"autoload-dev" : {
+"autoload" : {
     "files" : [
         "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
     ]
 }
 ```
 
-Step 2. Run Composer: `php composer.phar install` or `php composer.phar update deminy/behat-rest-testing`
-
-NOTE: **when running _Composer_, please make sure not to use tag "--no-dev"; otherwise, _PHPUnit_ file _Functions.php_ may
-not be loaded as expected.**
+Step 2. Run Composer: `php composer.phar install`.
 
 # How to Test
 
