@@ -7,6 +7,9 @@
 This repo is to help developers to easily understand how to do feature tests with Behat, and to start writing
 feature tests for REST APIs.
 
+**NOTE: This 1.x branch is for Behat 2.x only, with minimum maintenance ongoing. If you use Behat 3, please use
+[master branch](https://github.com/deminy/behat-rest-testing) instead.**
+
 This was based on [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a hard fork of
 [Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)), with various major changes:
 
