@@ -78,10 +78,12 @@ properly or not (If everything is good, the URL should return string "OK" back).
 
 ## 2. Test the sample features.
 
-### 1.1. Create the configuration file "behat.yml".
+### 1.1. Create the configuration file "behat.yml" (optional).
 
 For the sample test provided, you can create the file by copying directly from file "behat.yml.dist" without any
 modifications required.
+
+Note that you don't have to do this if you prefer to use file "behat.yml.dist" directly.
 
 ### 2.2. Run the test command.
 
@@ -89,6 +91,8 @@ Now, run following command to test sample features:
 
 ```
 vendor/bin/behat
+# OR
+vendor/bin/behat -p default (explicitly to use profile "default")
 ```
 
 If everything is good, you should see the output as in following screenshot:
