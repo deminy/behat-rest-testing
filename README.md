@@ -47,7 +47,7 @@ Step 1. Add the repo as a dependency.
 
 ``` json
 "require": {
-    "deminy/behat-rest-testing": "~3.0.0"
+    "deminy/behat-rest-testing": "@dev"
 }
 ```
 
