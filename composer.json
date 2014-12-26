@@ -1,6 +1,6 @@
 {
     "name": "deminy/behat-rest-testing",
-    "description": "Demo on how to do feature tests with Behat and how to start writing feature tests for REST APIs.",
+    "description": "Demo on doing feature tests with Behat 3 and how to start writing feature tests for REST APIs.",
     "keywords": [
         "PHP",
         "Behat",
@@ -15,14 +15,20 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "behat/behat": "~2.4",
-        "guzzle/guzzle": "~3.9.0",
+        "php": ">=5.4.0",
+        "behat/behat": "~3.0.14",
+        "behat/web-api-extension" : "@dev",
         "phpunit/phpunit": "~4.3.0"
     },
-    "autoload-dev" : {
-        "files" : [
-            "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
-        ]
+    "autoload" : {
+        "psr-4" : {
+            "Behat\\RestTestingContext\\" : "src/RestTestingContext/",
+            "Behat\\RestTestingExtension\\" : "src/RestTestingExtension/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        }
     }
 }

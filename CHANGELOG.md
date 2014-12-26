@@ -1,3 +1,9 @@
+3.0.x / TDB
+===========
+
+  * Add support for Behat 3.
+  * Add Behat 3 extension RestTestingExtension.
+
 1.0.1 / 2014-12-13
 ==================
 

@@ -4,8 +4,7 @@ php:
   - 5.5
   - 5.4
 env:
-  - BEHAT_VERSION="2.4.*"
-  - BEHAT_VERSION="2.5.*"
+  - BEHAT_VERSION="3.0.*"
 install:
   - composer require behat/behat:${BEHAT_VERSION}
   - composer install --no-interaction --prefer-source

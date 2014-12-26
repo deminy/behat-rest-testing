@@ -1,37 +1,36 @@
 # behat.yml
-# Behat configuration file for Behat 2.4.0+ but below 3.0.0.
-# For more information on the configuration file behat.yml, please read http://behat.readthedocs.org/en/v2.5/guides/7.config.html
+# Behat configuration file for Behat 3.0.0+.
+# For more information on the configuration file behat.yml, please read http://behat.readthedocs.org/en/v3.0/
 # For more information on YAML file format, please read http://en.wikipedia.org/wiki/YAML
 
 default:
-    paths:
-        features:  %behat.paths.base%/features      # Where Behat will look for your *.feature files.
-        bootstrap: %behat.paths.features%/bootstrap # the directory from which Behat will automatically load all *.php
-                                                    # files.
-                                                    # If you have a project of your own and install this package via
-                                                    # Composer to under directory "vendor/" of your project, you should
-                                                    # change the value to:
-                                                    #     ../vendor/deminy/behat-rest-testing/features/bootstrap
-    filters:
-        # You may consider to defined tags on selected features/scenarios and put tag names here so that only scenarios
-        # with tags listed below will be tested.
-        # tags: "@basic"
-    context:
-        # In most cases, here is what you need to change for your projects.
-        parameters:
-            base_url: http://localhost:8081        # Base URL of your REST services
+    autoload:
+        '': %paths.base%/features/bootstrap
+    # formatters:
+    #     progress: ~
+    extensions:
+        Behat\WebApiExtension:
+            base_url: http://localhost:8081
+        Behat\RestTestingExtension:
+    suites:
+        default:
+            paths: [ %paths.base%/features ] # Where Behat will look for your *.feature files.
+            contexts:
+                - Behat\WebApiExtension\Context\WebApiContext
+                - Behat\RestTestingExtension\Context\RestTestingContext
+                - Behat\RestTestingContext\RestContext
+                - SampleContext
+
+another_profile:
+    autoload:
+        '': %paths.base%/features/bootstrap
+    # formatters:
+    #     progress: ~
+    extensions:
+        Behat\WebApiExtension:
+            base_url: http://localhost:8081 # Base URL of your REST services
+    suites:
+        other_features:
             paths:
-                base:      %behat.paths.base%      # An absolute path under which closured step/hook definitions sit.
-                                                   # NOTE: All following paths are relative to this base path.
-                bootstrap: features/bootstrap      # The directory where Behat loads subcontexts instances.
-                steps:     features/steps          # The directory where Behat loads closured step definitions from.
-                hooks:     features/support        # The directory where Behat loads closured hook definitions from.
-            subContexts:
-                # You may chain contexts with the main context (FeatureContext). In this way all the context classes
-                # may communicate with each other. Sub-contexts should be listed here in a way like:
-                # - FirstContext  # Please make sure you have file FirstContext.php available under /features/boostrap/
-                # - SecondContext # Please make sure you have file SecondContext.php available under /features/boostrap/
-            associative:
-                true  # Boolean "true" or "false". Specifies If JSON response should be decoded to an associative array
-                      # or a nested stdClass object hierarchy.  This is helpful when some of your JSON responses cannot
-                      # be decoded to PHP objects.
+                - %paths.base%/features # Where Behat will look for your *.feature files.
+            contexts: [ 'Behat\WebApiExtension\Context\WebApiContext', 'SampleContext' ]

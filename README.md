@@ -9,17 +9,23 @@ tests for REST APIs, with following features included:
 
 * Core contexts/steps for testing REST APIs.
 * Sample RESTful services, and sample feature tests against the services.
-* Samples for closured steps.
-* Samples for closured hooks.
 * Best of all: To start writing feature tests for the project you are working on, you may use this repo in your project
 via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
 
+**NOTE**: Following instructions are for v3.x running on Behat 3.0.0+ and PHP 5.4+ only. If you use Behat 2.x or PHP
+5.3, please check branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for details.
+
 # Dependencies
 
+## v1.x
+
 * [PHP](http://www.php.net) 5.3.3+
-* [Behat](https://github.com/Behat/Behat) >=2.4.0, <=3.0.0. As of now this repository doesn't yet support Behat 3.0.0+
-due to incompatible API changes in Behat.
-* PHP extension [mbstring](http://www.php.net/mbstring) (used by [Behat](http://www.behat.org))
+* [Behat](https://github.com/Behat/Behat) >=2.4.0, <=3.0.0.
+
+## v3.x
+
+* [PHP](http://www.php.net) 5.4.0+
+* [Behat](https://github.com/Behat/Behat) 3.0.0+.
 
 # Installation - Source
 
@@ -35,48 +41,32 @@ curl -s http://getcomposer.org/installer | php && ./composer.phar install
 You may also install using [Composer](https://github.com/composer/composer) if you want to use this repo in your own
 project.
 
-Step 1. Add the repo as a dependency. Please note that you have to explicitly include the _PHPUnit_ file _Functions.php_
-explicitly since we use it as an assertion tool.
+Step 1. Add the repo as a dependency.
 
 ``` json
 "require": {
-    "deminy/behat-rest-testing": "~1.0.0"
-},
-"autoload" : {
-    "files" : [
-        "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
-    ]
+    "deminy/behat-rest-testing": "~3.0.0"
 }
 ```
+
+**NOTE**: This is for v3.x (current master branch) only. If you use v1.x (running with Behat 2.x) of this repository,
+please reference [installation instructions for v1.x](https://github.com/deminy/behat-rest-testing/blob/1.x/README.md)
+for details.
 
 Step 2. Run Composer: `php composer.phar install`.
 
 # How to Test
 
-### 1. Set up and run REST API server.
+## 1. Set up and run REST API server.
 
 You can have a virtual host set up under Apache, with DocumentRoot set to "www/" of this repo and DirectoryIndex set
 to "router.php". Please make sure that module mod_rewrite is enabled, otherwise the REST server won't be able to handle
 requests properly. You may also need to update option "base_url" in the configuration file "behat.yml".
 
 Alternatively, you may consider to use the
-[PHP 5.4+ built-in web server](http://php.net/manual/en/features.commandline.webserver.php) following these steps:
+[PHP 5.4+ built-in web server](http://php.net/manual/en/features.commandline.webserver.php).
 
-#### 1.1. Install PHP 5.4+.
-
-If you happen not have PHP 5.4+, please download it and use following command to install it (Here I assume you use PHP
-5.4):
-
-```
-./configure --prefix=/usr/local/php54
-make
-sudo make install
-```
-
-#### 1.2. Start the REST API server.
-
-To start the [PHP 5.4+ built-in web server](http://php.net/manual/en/features.commandline.webserver.php), please
-run command similar to following:
+To start the REST API server using PHP 5.4+ built-in web server, please run command similar to following:
 
 ```
 /usr/local/php54/bin/php -S localhost:8081 www/router.php
@@ -85,14 +75,14 @@ run command similar to following:
 The web server now serves as the REST API server. You can visit URL http://localhost:8081 to see if the server runs
 properly or not (If everything is good, the URL should return string "OK" back).
 
-### 2. Test the sample features.
+## 2. Test the sample features.
 
-#### 2.1. Create the configuration file "behat.yml".
+### 1.1. Create the configuration file "behat.yml".
 
 For the sample test provided, you can create the file by copying directly from file "behat.yml.dist" without any
 modifications required.
 
-#### 2.2. Run the test command.
+### 2.2. Run the test command.
 
 Now, run following command to test sample features:
 
@@ -104,64 +94,14 @@ If everything is good, you should see the output as in following screenshot:
 
 ![output when running Behat sample tests](https://raw.github.com/deminy/behat-rest-testing/master/screenshot.png "")
 
-# Create Feature Tests for Your Project
-
-A nice way to organize your tests is to install this repo with _Composer_, and organize your files as suggested below:
-
-<pre>
-/path-to-your-project
-    composer.json                 # Make sure to have package "deminy/behat-rest-testing" properly listed in this file.
-    some-other-directories/
-    tests/
-        features/
-            bootstrap/            # Here your define your own contexts. To load these self-defined contexts, you need
-                FirstContext.php  # list them in your behat.xml file. Please check comments in file /behat.yml.dist for
-                SecondContext.php # details.
-                // ......
-            steps/                # Under this directory you may define your own steps.
-                first_steps.php
-                second_steps.php
-                // ......
-            support/              # Under this directory you may define your own hooks.
-                first_hooks.php
-                second_hooks.php
-                // ......
-            first.feature         # Here you define your feature tests. You may also put your *.feature files under some
-            second.feature        # subdirectories if you want.
-            // ......
-        behat.yml                 # Here is your customized behat.yml file. See file /behat.yml.dist for details.
-    vendor/                       # Generated by Composer (assuming you didn't specify customized vendor/ directory)
-        some-other-directories/
-        behat/
-        bin/
-            behat                 # The shell script to run Behat.
-        deminy/
-            behat-rest-testing/
-                features/
-                www/
-                behat.yml.dist    # Please check comments in this file to see how to define your behat.xml properly.
-                // ......
-</pre>
-
-To test your own feature tests, please run following commands:
-
-```
-cd /path-to-your-project; cd tests;
-../vendor/bin/behat
-```
-
 # TODOs
 
+* Make it work as a fully-ready Behat extension.
 * Support different environments (development, QA, staging, production, etc).
 
 # Known Limitations
 
 * The code may not work under Windows platforms.
-
-# Credits
-
-* This repository was started from [Keith Loy's work](https://github.com/kloy/behat-rest-testing) (which was essential a
-hard fork of [Chris Cornutt's work](https://github.com/enygma/behat-fuel-rest)), with major refactors/changes.
 
 # License
 

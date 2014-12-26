@@ -44,6 +44,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
             exit('OK');
         }
         // NOTE: no break statement here.
+    case 'PUT':
+        // For PUT requests, variable $_REQUEST might always be empty when using PHP 5.4+ built-in web server.
+        $requestData = json_decode(file_get_contents('php://input'), true);
+        // No break statement here.
     case 'DELETE':
         if (!preg_match('#^/employee/(\d+)$#', $_SERVER['REQUEST_URI'], $matches)) {
             badRequest('Bad REST request.');
@@ -52,19 +56,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     case 'POST':
-    case 'PUT':
         if ('/employee' != $_SERVER['REQUEST_URI']) {
             badRequest('Bad REST request.');
         } else {
-            /**
-             * For PUT requests, variable $_REQUEST might always be empty when using PHP 5.4+ built-in web server.
-             */
-            $rawRequestData = file_get_contents('php://input');
+            $requestData = json_decode(file_get_contents('php://input'), true);
 
-            if (!empty($rawRequestData)) {
-                parse_str($rawRequestData, $requestData);
+            if (is_array($requestData) && array_key_exists('employeeId', $requestData)) {
                 $employeeId = (int) $requestData['employeeId'];
-            } else {
+            }
+
+            if (empty($employeeId)) {
                 badRequest('Unsupported REST request.');
             }
         }
