@@ -5,12 +5,15 @@ php:
   - 5.4
 env:
   - BEHAT_VERSION="3.0.*"
+before_install:
+  # start a web server on port 8080, running in the background
+  - php -S localhost:8081 www/router.php > /dev/null 2> "$TRAVIS_BUILD_DIR/behat-rest-testing.log" &
 install:
   - composer require behat/behat:${BEHAT_VERSION}
   - composer install --no-interaction --prefer-source
   - composer show -i
-before_script:
-  - php -S localhost:8081 www/router.php &
-  - sleep 4
+  - pyrus install pear/PHP_CodeSniffer
+  - phpenv rehash
 script:
   - vendor/bin/behat
+  - phpcs --standard=ruleset.xml features src www
