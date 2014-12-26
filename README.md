@@ -27,7 +27,7 @@ please check branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x
 
 * [PHP](http://www.php.net) 5.4.0+
 * [Behat](https://github.com/Behat/Behat) 3.0.0+.
-* [behat Web API Extension](https://github.com/Behat/WebApiExtension).
+* [Behat Web API Extension](https://github.com/Behat/WebApiExtension).
 
 # Installation - Source
 
