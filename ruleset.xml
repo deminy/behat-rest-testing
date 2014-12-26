@@ -64,14 +64,11 @@
     </rule>
 
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-        <exclude-pattern>features/bootstrap/FeatureContext.php</exclude-pattern>
-        <exclude-pattern>features/steps/sample_steps.php</exclude-pattern>
         <exclude-pattern>www/router.php</exclude-pattern>
     </rule>
 
     <rule ref="Squiz.Functions.GlobalFunction">
         <exclude-pattern>www/router.php</exclude-pattern>
-        <exclude-pattern>features/steps/sample_steps.php</exclude-pattern>
     </rule>
 
 </ruleset>
