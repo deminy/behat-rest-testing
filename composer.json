@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.4.0",
         "behat/behat": "~3.0.14",
-        "behat/web-api-extension" : "1.0.*@dev",
+        "behat/web-api-extension" : "dev-master",
         "phpunit/phpunit": "~4.3.0"
     },
     "autoload" : {
