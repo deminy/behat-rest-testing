@@ -12,8 +12,7 @@ class SampleContext extends BaseContext
      */
     public static function beforeFeature()
     {
-        $file = dirname(__FILE__) . '/../../www/employees.txt';
-        file_put_contents($file, '');
+        file_put_contents(self::getDataFile(), '');
     }
 
     /**
@@ -21,8 +20,7 @@ class SampleContext extends BaseContext
      */
     public static function afterFeature()
     {
-        $file = dirname(__FILE__) . '/../../www/employees.txt';
-        file_put_contents($file, '');
+        file_put_contents(self::getDataFile(), '');
     }
 
     /**
@@ -76,5 +74,13 @@ class SampleContext extends BaseContext
                 throw new \Exception('Unsupported data type: ' . $fieldType);
                 break;
         }
+    }
+
+    /**
+     * @return string
+     */
+    protected static function getDataFile()
+    {
+        return __DIR__ . '/../../www/employees.txt';
     }
 }
