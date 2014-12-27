@@ -7,13 +7,15 @@ php:
 env:
   - BEHAT_VERSION="3.0.*"
 before_install:
-  # start a web server on port 8080, running in the background
+  # start a web server on port 8081, running in the background
   # - php -S localhost:8081 www/router.php > /dev/null 2> "$TRAVIS_BUILD_DIR/behat-rest-testing.log" &
   - bin/start_server.sh
 install:
   - composer require behat/behat:${BEHAT_VERSION}
   - composer install --no-interaction --prefer-source
   - composer show -i
+  - echo $(phpenv version-name)
+  - echo $TRAVIS_PHP_VERSION
   - if [ $(phpenv version-name) != "hhvm" ]; then pyrus install pear/PHP_CodeSniffer; phpenv rehash; fi
 script:
   - vendor/bin/behat

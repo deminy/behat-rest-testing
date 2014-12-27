@@ -37,7 +37,7 @@ http {
         root $TRAVIS_BUILD_DIR/www;
 
         location / {
-            try_files /router.php;
+            try_files $uri /router.php;
 
             fastcgi_pass 127.0.0.1:9000;
             fastcgi_index router.php;
