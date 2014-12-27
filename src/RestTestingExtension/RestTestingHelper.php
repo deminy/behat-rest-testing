@@ -27,7 +27,7 @@ class RestTestingHelper
 
         while (! $reflection->hasProperty($name)) {
             if (! ($reflection = $reflection->getParentClass())) {
-                throw new Exception(sprintf('Class "%s" do not have property "%s" defined.', $class, $name));
+                throw new Exception(sprintf('Class "%s" does not have property "%s" defined.', $class, $name));
             }
         }
 

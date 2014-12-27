@@ -27,7 +27,7 @@ class RestTestingAwareInitializer implements ContextInitializer
      */
     public function initializeContext(Context $context)
     {
-        if (($context instanceof WebApiContext)) {
+        if ($context instanceof WebApiContext) {
             BaseContext::setWebApiContext($context);
         }
     }
