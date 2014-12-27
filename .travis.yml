@@ -13,8 +13,7 @@ install:
   - composer require behat/behat:${BEHAT_VERSION}
   - composer install --no-interaction --prefer-source
   - composer show -i
-  - pyrus install pear/PHP_CodeSniffer
-  - phpenv rehash
+  - if [ $(phpenv version-name) != "hhvm" ]; then pyrus install pear/PHP_CodeSniffer; phpenv rehash; fi
 script:
   - vendor/bin/behat
-  - phpcs --standard=ruleset.xml features src www
+  - if [ $(phpenv version-name) != "hhvm" ]; then phpcs --standard=ruleset.xml features src www; fi
