@@ -77,16 +77,14 @@ To start the REST API server using PHP 5.4+ built-in web server, please run comm
 The web server now serves as the REST API server. You can visit URL http://localhost:8081 to see if the server runs
 properly or not (If everything is good, the URL should return string "OK" back).
 
-## 2. Test the sample features.
-
-### 1.1. Create the configuration file "behat.yml" (optional).
+## 2. Create the configuration file "behat.yml" (optional).
 
 For the sample test provided, you can create the file by copying directly from file "behat.yml.dist" without any
 modifications required.
 
 Note that you don't have to do this if you prefer to use file "behat.yml.dist" directly.
 
-### 2.2. Run the test command.
+## 3. Run the test command.
 
 Now, run following command to test sample features:
 
