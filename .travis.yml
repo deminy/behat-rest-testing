@@ -8,7 +8,8 @@ env:
   - BEHAT_VERSION="3.0.*"
 before_install:
   # start a web server on port 8080, running in the background
-  - php -S localhost:8081 www/router.php > /dev/null 2> "$TRAVIS_BUILD_DIR/behat-rest-testing.log" &
+  # - php -S localhost:8081 www/router.php > /dev/null 2> "$TRAVIS_BUILD_DIR/behat-rest-testing.log" &
+  - bin/start_server.sh
 install:
   - composer require behat/behat:${BEHAT_VERSION}
   - composer install --no-interaction --prefer-source
