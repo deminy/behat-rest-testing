@@ -35,10 +35,9 @@ http {
         listen 8081;
 
         root $TRAVIS_BUILD_DIR/www;
+        try_files $uri /router.php =404;
 
         location / {
-            try_files $uri /router.php;
-
             fastcgi_pass 127.0.0.1:9000;
             fastcgi_index router.php;
             fastcgi_param SCRIPT_FILENAME \$document_root/router.php;
