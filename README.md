@@ -14,8 +14,8 @@ tests for REST APIs, with following features included:
 via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries. (NOTE: ready for use on Behat 2.x, but not
 yet ready with Behat 3.)
 
-**NOTE**: Following instructions are for running on Behat 3.0.0+ and PHP 5.4+ only. If you use Behat 2.x and/or PHP 5.3,
-please check branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for details.
+**NOTE**: Following instructions focus on Behat 3.0.0+ and PHP 5.4+. If you use Behat 2.x and/or PHP 5.3, please check
+branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for details.
 
 # Dependencies
 
