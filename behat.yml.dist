@@ -21,16 +21,15 @@ default:
                 - Behat\RestTestingContext\RestContext
                 - SampleContext
 
+# This 2nd profile is not a working copy (no features defined for it), and is just for demostration purpose.
 another_profile:
     autoload:
         '': %paths.base%/features/bootstrap
-    # formatters:
-    #     progress: ~
     extensions:
         Behat\WebApiExtension:
-            base_url: http://localhost:8081 # Base URL of your REST services
+            base_url: http://localhost:8081
     suites:
         other_features:
             paths:
-                - %paths.base%/features # Where Behat will look for your *.feature files.
+                - %paths.base%/features
             contexts: [ 'Behat\WebApiExtension\Context\WebApiContext', 'SampleContext' ]
