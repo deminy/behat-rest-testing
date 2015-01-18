@@ -106,7 +106,9 @@ class BaseContext implements RestTestingAwareContext, SnippetAcceptingContext
      */
     public function __set($name, $value)
     {
-        return self::set($name, $value);
+        self::set($name, $value);
+
+        return $this;
     }
 
     /**
