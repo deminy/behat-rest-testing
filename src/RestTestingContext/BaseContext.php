@@ -12,14 +12,19 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\RestTestingExtension\Context\RestTestingAwareContext;
 use Behat\RestTestingExtension\RestTestingHelper;
 use Behat\WebApiExtension\Context\WebApiContext;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Stream\Stream;
 
 /**
  * Base context.
  */
 class BaseContext implements RestTestingAwareContext, SnippetAcceptingContext
 {
+    /**
+     * @var RestContext
+     */
+    protected static $restContext;
+
     /**
      * @var WebApiContext
      */
@@ -133,6 +138,49 @@ class BaseContext implements RestTestingAwareContext, SnippetAcceptingContext
     }
 
     /**
+     * @return ResponseInterface
+     */
+    protected function getResponse()
+    {
+        return RestTestingHelper::getProperty(self::getWebApiContext(), 'response');
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return void
+     */
+    protected function setResponse(ResponseInterface $response)
+    {
+        RestTestingHelper::setProperty(self::getWebApiContext(), 'response', $response);
+    }
+
+    /**
+     * @param string $body
+     * @return void
+     */
+    protected function setResponseBody($body)
+    {
+        self::getResponse()->setBody(Stream::factory($body));
+    }
+
+    /**
+     * @return RestContext
+     */
+    public static function getRestContext()
+    {
+        return self::$restContext;
+    }
+
+    /**
+     * @param RestContext $restContext
+     * @return void
+     */
+    public static function setRestContext(RestContext $restContext)
+    {
+        self::$restContext = $restContext;
+    }
+
+    /**
      * @return WebApiContext
      */
     public static function getWebApiContext()
@@ -147,13 +195,5 @@ class BaseContext implements RestTestingAwareContext, SnippetAcceptingContext
     public static function setWebApiContext(WebApiContext $webApiContext)
     {
         self::$webApiContext = $webApiContext;
-    }
-
-    /**
-     * @return ResponseInterface
-     */
-    protected function getResponse()
-    {
-        return RestTestingHelper::getProperty(self::getWebApiContext(), 'response');
     }
 }

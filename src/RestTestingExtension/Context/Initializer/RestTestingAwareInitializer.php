@@ -10,6 +10,7 @@ namespace Behat\RestTestingExtension\Context\Initializer;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\RestTestingContext\BaseContext;
+use Behat\RestTestingContext\RestContext;
 use Behat\WebApiExtension\Context\WebApiContext;
 
 /**
@@ -29,6 +30,8 @@ class RestTestingAwareInitializer implements ContextInitializer
     {
         if ($context instanceof WebApiContext) {
             BaseContext::setWebApiContext($context);
+        } elseif ($context instanceof RestContext) {
+            BaseContext::setRestContext($context);
         }
     }
 }
