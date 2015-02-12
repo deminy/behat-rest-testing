@@ -32,7 +32,7 @@ branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for detail
 
 # Installation - Source
 
-You will need to download composer.phar and run the install command under the same directory where the 'composer.json'
+You will need to download _Composer_ and run the install command under the same directory where the 'composer.json'
 file is located:
 
 ```
