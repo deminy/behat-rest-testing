@@ -1,0 +1,7 @@
+{
+  "7" : {
+    "name" : "James Bond",
+    "age"  : 27,
+    "note" : "This is a sample record. This data file will be rebuilt at the beginning when running feature tests."
+  }
+}

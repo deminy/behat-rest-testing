@@ -5,17 +5,14 @@
  */
 
 /**
- * This script simulates 4 types REST services (GET, POST and PUT, DELETE), manipuating employee data which are stored
- * in file "employees.txt" in following format as a serialized string:
- *     array(
- *         // indexes are employee IDs
- *         3 => array(
- *             'name' => 'tom',
- *             'age'  => 15,
- *         ),
- *         // ......
- *     );
- * );
+ * This script simulates 4 types REST services (GET, POST and PUT, DELETE), manipulating employee data which are stored
+ * in file "employees.json" in JSON format:
+ *     {
+ *         "7" : {
+ *             "name" : "James Bond",
+ *             "age"  : 27
+ *         }
+ *     }
  */
 
 /**
@@ -31,11 +28,11 @@ function badRequest($message)
     exit($message);
 }
 
-$file = __DIR__ . '/employees.txt';
+$file = __DIR__ . '/employees.json';
 
 // Get all employees information.
 $data = is_readable($file) ? file_get_contents($file) : null;
-$employees = !empty($data) ? unserialize($data) : array();
+$employees = !empty($data) ? json_decode($data, true) : array();
 
 // Validate request URL.
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -86,7 +83,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 'name' => array_key_exists('name', $requestData) ? $requestData['name'] : null,
                 'age'  => array_key_exists('age', $requestData) ? (int) $requestData['age'] : null,
             );
-            file_put_contents($file, serialize($employees));
+            file_put_contents($file, json_encode($employees));
         } else {
             badRequest('Unable to insert because the employee already exists.');
         }
@@ -109,7 +106,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 'name' => $name,
                 'age'  => $age,
             );
-            file_put_contents($file, serialize($employees));
+            file_put_contents($file, json_encode($employees));
         } else {
             badRequest('Unable to update because the employee does not exist.');
         }
@@ -117,7 +114,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'DELETE':
         if (array_key_exists($employeeId, $employees)) {
             unset($employees[$employeeId]);
-            file_put_contents($file, serialize($employees));
+            file_put_contents($file, json_encode($employees));
         } else {
             badRequest('Unable to delete because the employee does not exist.');
         }

@@ -81,6 +81,6 @@ class SampleContext extends BaseContext
      */
     protected static function getDataFile()
     {
-        return __DIR__ . '/../../www/employees.txt';
+        return __DIR__ . '/../../www/employees.json';
     }
 }

@@ -5,14 +5,14 @@ Feature: Testing sample REST services
 
     Scenario: Creating a New Employee
         When I send a POST request to "/employee" with values:
-            | employeeId | 007         |
+            | employeeId | 7           |
             | name       | James Bond  |
             | age        | 27          |
         Then response code should be 200
             And the response should be "true"
 
     Scenario: Finding an Existing Employee
-        When I send a GET request to "/employee/007"
+        When I send a GET request to "/employee/7"
         Then response code should be 200
             And the response should contain json:
             """"
@@ -24,15 +24,15 @@ Feature: Testing sample REST services
         And in the response there is no field called "gender"
 
     Scenario: Updating an Existing Employee
-        When I send a PUT request to "/employee/007" with values:
+        When I send a PUT request to "/employee/7" with values:
             | age | 38 |
         Then response code should be 200
             And the response should be "true"
 
     Scenario: Deleting Existing and Non-existing Employees
-        Given I send a DELETE request to "/employee/007"
+        Given I send a DELETE request to "/employee/7"
         Then response code should be 200
             And the response should be "true"
-        Given I send a DELETE request to "/employee/008"
+        Given I send a DELETE request to "/employee/8"
         Then response code should be 400
             And the response should contain "Unable to delete because the employee does not exist."
