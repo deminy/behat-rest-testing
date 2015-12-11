@@ -26,7 +26,7 @@ branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for detail
 
 ## Branch master (current development branch)
 
-* [PHP](http://www.php.net) 5.4, 5.5, 5.6 and 7.0
+* [PHP](http://www.php.net) 5.4, 5.5, 5.6, 7.0 and [HHVM](http://hhvm.com)
 * [Behat](https://github.com/Behat/Behat) 3.0.0+.
 * [Behat Web API Extension](https://github.com/Behat/WebApiExtension).
 
