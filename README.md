@@ -101,10 +101,6 @@ If everything is good, you should see the output as in following screenshot:
 
 * Support different environments (development, QA, staging, production, etc).
 
-# Known Limitations
-
-* The code may not work under Windows platforms.
-
 # License
 
 MIT license.
