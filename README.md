@@ -11,24 +11,23 @@ tests for REST APIs, with following features included:
 * Core contexts/steps for testing REST APIs.
 * Sample RESTful services, and sample feature tests against the services.
 * Best of all: To start writing feature tests for the project you are working on, you may use this repo in your project
-via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries. (NOTE: ready for use on Behat 2.x, but not
-yet ready with Behat 3.)
+via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
 
 **NOTE**: Following instructions focus on Behat 3.0.0+ and PHP 5.4+. If you use Behat 2.x and/or PHP 5.3, please check
 branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for details.
 
 # Dependencies
 
-## Branch 1.x (stable releases)
-
-* [PHP](http://www.php.net) 5.3.3+
-* [Behat](https://github.com/Behat/Behat) >=2.4.0, <=3.0.0.
-
 ## Branch master (current development branch)
 
 * [PHP](http://www.php.net) 5.4, 5.5, 5.6, 7.0 and [HHVM](http://hhvm.com) 3.9+
 * [Behat](https://github.com/Behat/Behat) 3.0.0+.
 * [Behat Web API Extension](https://github.com/Behat/WebApiExtension).
+
+## Branch 1.x (stable releases)
+
+* [PHP](http://www.php.net) 5.3.3+
+* [Behat](https://github.com/Behat/Behat) >=2.4.0, <=3.0.0.
 
 # Installation - Source
 
@@ -71,7 +70,7 @@ Alternatively, you may consider to use the
 To start the REST API server using PHP 5.4+ built-in web server, please run command similar to following:
 
 ```
-/usr/local/php54/bin/php -S localhost:8081 www/router.php
+php -S localhost:8081 www/router.php
 ```
 
 The web server now serves as the REST API server. You can visit URL http://localhost:8081 to see if the server runs
@@ -89,9 +88,9 @@ Note that you don't have to do this if you prefer to use file "behat.yml.dist" d
 Now, run following command to test sample features:
 
 ```
-vendor/bin/behat
+./vendor/bin/behat
 # OR
-vendor/bin/behat -p default (explicitly to use profile "default")
+./vendor/bin/behat -p default (explicitly to use profile "default")
 ```
 
 If everything is good, you should see the output as in following screenshot:
@@ -100,7 +99,6 @@ If everything is good, you should see the output as in following screenshot:
 
 # TODOs
 
-* Make it work as a fully-ready Behat extension.
 * Support different environments (development, QA, staging, production, etc).
 
 # Known Limitations
