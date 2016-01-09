@@ -5,7 +5,7 @@
  */
 
 /**
- * This script simulates 4 types REST services (GET, POST and PUT, DELETE), manipuating employee data which are stored
+ * This script simulates 4 types REST services (GET, POST, PUT and DELETE), manipuating employee data which are stored
  * in file "employees.txt" in following format as a serialized string:
  *     array(
  *         // indexes are employee IDs

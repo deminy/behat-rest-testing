@@ -1,3 +1,9 @@
+1.0.2 / 2016-01-09
+==================
+
+  * Marked as compatible with PHP 7.0 and HHVM.
+  * Mark dependency versions looser.
+
 1.0.1 / 2014-12-13
 ==================
 
