@@ -13,15 +13,15 @@ tests for REST APIs, with following features included:
 * Best of all: To start writing feature tests for the project you are working on, you may use this repo in your project
 via _Composer_ if you happen to use _Composer_ to manage 3rd-party libraries.
 
-**NOTE**: Following instructions focus on Behat 3.0.0+ and PHP 5.4+. If you use Behat 2.x and/or PHP 5.3, please check
-branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for details.
+**NOTE**: Following instructions focus on Behat 3.0.6+ and PHP 5.4+. If you use Behat 2.x and/or PHP 5.3 (5.3.3+),
+please check branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for details.
 
 # Dependencies
 
 ## Branch master (current development branch)
 
 * [PHP](http://www.php.net) 5.4, 5.5, 5.6, 7.0 and [HHVM](http://hhvm.com) 3.9+
-* [Behat](https://github.com/Behat/Behat) 3.0.0+.
+* [Behat](https://github.com/Behat/Behat) 3.0.6+.
 * [Behat Web API Extension](https://github.com/Behat/WebApiExtension).
 
 ## Branch 1.x (stable releases)
