@@ -5,7 +5,7 @@
  */
 
 /**
- * This script simulates 4 types REST services (GET, POST and PUT, DELETE), manipulating employee data which are stored
+ * This script simulates 4 types REST services (GET, POST, PUT and DELETE), manipulating employee data which are stored
  * in file "employees.json" in JSON format:
  *     {
  *         "7" : {
@@ -44,7 +44,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'PUT':
         // For PUT requests, variable $_REQUEST might always be empty when using PHP 5.4+ built-in web server.
         $requestData = json_decode(file_get_contents('php://input'), true);
-        // No break statement here.
+        // NOTE: No break statement here.
     case 'DELETE':
         if (!preg_match('#^/employee/(\d+)$#', $_SERVER['REQUEST_URI'], $matches)) {
             badRequest('Bad REST request.');

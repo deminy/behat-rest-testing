@@ -3,6 +3,8 @@
 
   * Add support for Behat 3.
   * Add Behat 3 extension RestTestingExtension.
+  * Add PHP 7 and HHVM environments when running Travis CI.
+  * Use JSON format instead of PHP serialized string when storing test data.
 
 1.0.1 / 2014-12-13
 ==================
