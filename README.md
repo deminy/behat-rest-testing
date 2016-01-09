@@ -90,7 +90,7 @@ Now, run following command to test sample features:
 ```
 ./vendor/bin/behat
 # OR
-./vendor/bin/behat -p default (explicitly to use profile "default")
+./vendor/bin/behat -p default # explicitly to use profile "default"
 ```
 
 If everything is good, you should see the output as in following screenshot:
