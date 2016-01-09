@@ -34,7 +34,7 @@ branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x)" for detail
 You will need to download _Composer_ and run the install command under the same directory where the 'composer.json'
 file is located:
 
-```
+```bash
 curl -s http://getcomposer.org/installer | php && ./composer.phar install
 ```
 
@@ -45,7 +45,7 @@ project.
 
 Step 1. Add the repo as a dependency.
 
-``` json
+```json
 "require": {
     "deminy/behat-rest-testing": "@dev"
 }
@@ -69,7 +69,7 @@ Alternatively, you may consider to use the
 
 To start the REST API server using PHP 5.4+ built-in web server, please run command similar to following:
 
-```
+```bash
 php -S localhost:8081 www/router.php
 ```
 
@@ -87,7 +87,7 @@ Note that you don't have to do this if you prefer to use file "behat.yml.dist" d
 
 Now, run following command to test sample features:
 
-```
+```bash
 ./vendor/bin/behat
 # OR
 ./vendor/bin/behat -p default # explicitly to use profile "default"
