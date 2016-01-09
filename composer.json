@@ -16,12 +16,12 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "behat/behat": "~3.0.14",
+        "behat/behat": "~3.0.6",
         "behat/web-api-extension" : "dev-master",
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "4.0 - 5.1"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer" : "~2.5.0"
+        "squizlabs/php_codesniffer" : "2.0 - 2.5"
     },
     "autoload" : {
         "psr-4" : {
