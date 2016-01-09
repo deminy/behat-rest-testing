@@ -6,7 +6,7 @@ set -e
 
 touch "$TRAVIS_BUILD_DIR/behat-rest-testing.log"
 
-if [[ "$TRAVIS_PHP_VERSION" == "hhvm" ]]
+if [[ "$TRAVIS_PHP_VERSION" == "hhvm" ]] || [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]
 then
     echo "    Installing Nginx"
     wget http://nginx.org/keys/nginx_signing.key
