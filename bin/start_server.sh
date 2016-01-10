@@ -17,8 +17,8 @@ events {
 http {
     include /etc/nginx/mime.types;
 
-    error_log /var/log/nginx/error.log notice;
-    access_log /var/log/nginx/access.log;
+    error_log  $TRAVIS_BUILD_DIR/logs/nginx.error.log notice;
+    access_log $TRAVIS_BUILD_DIR/logs/nginx.access.log;
 
     server {
         server_name localhost;
@@ -38,9 +38,9 @@ http {
 CONF
     echo "Starting the HHVM daemon."
     hhvm --mode server -vServer.Type=fastcgi -vServer.IP='127.0.0.1' -vServer.Port=9000 > "$TRAVIS_BUILD_DIR/behat-rest-testing.log" 2>&1 &
+    mkdir -p "$TRAVIS_BUILD_DIR/logs"
     echo "Starting nginx."
-    sudo mkdir -p /var/log/nginx/
-    sudo nginx -c "$TRAVIS_BUILD_DIR/.nginx.conf"
+    nginx -c "$TRAVIS_BUILD_DIR/.nginx.conf"
 else
     echo "Starting the PHP builtin web server."
     php -S localhost:8081 www/router.php > /dev/null 2> "$TRAVIS_BUILD_DIR/behat-rest-testing.log" &
