@@ -18,13 +18,13 @@ please check branch "[1.x](https://github.com/deminy/behat-rest-testing/tree/1.x
 
 # Dependencies
 
-## Branch master (current development branch)
+## Branch master
 
 * [PHP](http://www.php.net) 5.4, 5.5, 5.6, 7.0 and [HHVM](http://hhvm.com) 3.9+
 * [Behat](https://github.com/Behat/Behat) 3.0.6+.
 * [Behat Web API Extension](https://github.com/Behat/WebApiExtension).
 
-## Branch 1.x (stable releases)
+## Branch 1.x (old releases for Behat 2.x)
 
 * [PHP](http://www.php.net) 5.3.3+
 * [Behat](https://github.com/Behat/Behat) >=2.4.0, <=3.0.0.
