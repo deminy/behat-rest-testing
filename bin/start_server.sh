@@ -10,17 +10,28 @@ then
     echo "Installing Nginx."
 
     cat > ".nginx.conf" <<CONF
+worker_processes 10;
+pid /tmp/nginx.pid;
+
+error_log /tmp/error.log;
+
 events {
     worker_connections 1024;
 }
 
 http {
-    error_log  $TRAVIS_BUILD_DIR/logs/nginx.error.log notice;
-    access_log $TRAVIS_BUILD_DIR/logs/nginx.access.log;
+    client_body_temp_path /tmp/nginx_client_body;
+    fastcgi_temp_path     /tmp/nginx_fastcgi_temp;
+    proxy_temp_path       /tmp/nginx_proxy_temp;
+    scgi_temp_path        /tmp/nginx_scgi_temp;
+    uwsgi_temp_path       /tmp/nginx_uwsgi_temp;
 
     server {
         server_name localhost;
         listen 8081;
+
+        error_log  /tmp/error.log;
+        access_log /tmp/access.log;
 
         root $TRAVIS_BUILD_DIR/www;
         try_files $uri /router.php =404;
