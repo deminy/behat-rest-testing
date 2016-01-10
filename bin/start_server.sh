@@ -15,8 +15,6 @@ events {
 }
 
 http {
-    include /etc/nginx/mime.types;
-
     error_log  $TRAVIS_BUILD_DIR/logs/nginx.error.log notice;
     access_log $TRAVIS_BUILD_DIR/logs/nginx.access.log;
 
@@ -31,7 +29,11 @@ http {
             fastcgi_pass 127.0.0.1:9000;
             fastcgi_index router.php;
             fastcgi_param SCRIPT_FILENAME \$document_root/router.php;
-            include /etc/nginx/fastcgi_params;
+            fastcgi_param REQUEST_METHOD  \$request_method;
+            fastcgi_param SCRIPT_NAME     \$fastcgi_script_name;
+            fastcgi_param REQUEST_URI     \$request_uri;
+            fastcgi_param DOCUMENT_URI    \$document_uri;
+            fastcgi_param DOCUMENT_ROOT   \$document_root;
         }
     }
 }
