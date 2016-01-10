@@ -1,3 +1,8 @@
+1.0.4 / TBD
+===========
+
+  * Use Travis CI container-based infrastructure.
+
 1.0.3 / 2016-01-09
 ==================
 
