@@ -21,7 +21,7 @@ default:
                 - Behat\RestTestingContext\RestContext
                 - SampleContext
 
-# This 2nd profile is not a working copy (no features defined for it), and is just for demostration purpose.
+# This 2nd profile is not a working copy (no features defined for it), and is just for demonstration purpose.
 another_profile:
     autoload:
         '': %paths.base%/features/bootstrap
