@@ -28,6 +28,12 @@ class SampleContext extends BaseContext
      */
     public static function beforeScenario()
     {
+        // Following code has same effects as step 'When I set header "Accept" with value "application/json"', except
+        // that it's executed before entering a scenario.
+        //
+        // The header added doesn't have any actual effect on the APIs nor the tests; we have it included/listed here
+        // just for demonstration, in case you need to know how to add HTTP headers when testing API calls.
+        self::getWebApiContext()->iSetHeaderWithValue('Accept', 'application/json');
     }
 
     /**

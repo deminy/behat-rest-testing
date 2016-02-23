@@ -5,9 +5,13 @@ Feature: Testing sample REST services
 
     Scenario: Creating a New Employee
         When I send a POST request to "/employee" with values:
-            | employeeId | 7           |
-            | name       | James Bond  |
-            | age        | 27          |
+            | employeeId | 7          |
+            | name       | James Bond |
+            | age        | 27         |
+            # Next step will add "Accept-Charset: utf-8" in HTTP header when making the API call. The header doesn't
+            # have any actual effect on the APIs nor the tests; we have it included/listed here just for demonstration,
+            # in case you need to know how to add HTTP headers when testing API calls.
+            And I set header "Accept-Charset" with value "utf-8"
         Then response code should be 200
             And the response should be "true"
 
