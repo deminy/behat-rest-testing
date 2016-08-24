@@ -24,7 +24,7 @@ class RestContext extends BaseContext
     {
         $message = sprintf("Field %s not found in response.", $name);
         if (!array_key_exists($name, $this->getResponseData())) {
-           throw new \Exception($message);
+            throw new \Exception($message);
         }
     }
 
@@ -102,7 +102,7 @@ class RestContext extends BaseContext
         $body = $this->getResponseBody();
         $message = sprintf("%s was expected for response body, but %s found instead", $string, $body);
         if ($body !== $string) {
-          throw new \Exception($message);
+            throw new \Exception($message);
         }
     }
 
