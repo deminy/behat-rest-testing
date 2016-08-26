@@ -20,7 +20,7 @@
         "behat/web-api-extension" : "dev-master"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer" : "2.0 - 2.5"
+        "squizlabs/php_codesniffer" : ">=2.0"
     },
     "autoload" : {
         "psr-4" : {
