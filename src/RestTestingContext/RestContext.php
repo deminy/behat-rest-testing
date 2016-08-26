@@ -8,7 +8,6 @@
 namespace Behat\RestTestingContext;
 
 use Behat\Behat\Context\Step;
-use PHPUnit_Framework_Assert;
 
 /**
  * Rest context.
@@ -23,7 +22,10 @@ class RestContext extends BaseContext
      */
     public function theResponseHasAField($name)
     {
-        PHPUnit_Framework_Assert::assertArrayHasKey($name, $this->getResponseData());
+        $message = sprintf("Field %s not found in response.", $name);
+        if (!array_key_exists($name, $this->getResponseData())) {
+            throw new \Exception($message);
+        }
     }
 
     /**
@@ -34,7 +36,10 @@ class RestContext extends BaseContext
      */
     public function theResponseShouldNotHaveAField($name)
     {
-        PHPUnit_Framework_Assert::assertArrayNotHasKey($name, $this->getResponseData());
+        $message = sprintf("Field %s should not have been found in response, but was.", $name);
+        if (array_key_exists($name, $this->getResponseData())) {
+            throw new \Exception($message);
+        }
     }
 
     /**
@@ -46,9 +51,11 @@ class RestContext extends BaseContext
      */
     public function valueOfTheFieldEquals($name, $value)
     {
-        PHPUnit_Framework_Assert::assertArrayHasKey($name, $this->getResponseData())
-        && PHPUnit_Framework_Assert::assertEquals($value, $this->responseData[$name])
-        ;
+        $this->theResponseHasAField($name);
+        $message = sprintf("%s was expected for %s, but %s found instead", $value, $name, $this->responseData[$name]);
+        if ($this->responseData[$name] != $value) {
+            throw new \Exception($message);
+        }
     }
 
     /**
@@ -62,9 +69,7 @@ class RestContext extends BaseContext
      */
     public function fieldIsOfTypeWithValue($name, $type, $value)
     {
-        PHPUnit_Framework_Assert::assertArrayHasKey($name, $this->getResponseData())
-        && PHPUnit_Framework_Assert::assertEquals($value, $this->responseData[$name])
-        ;
+        $this->valueOfTheFieldEquals($name, $value);
 
         switch (strtolower($type)) {
             case 'int':
@@ -94,7 +99,11 @@ class RestContext extends BaseContext
      */
     public function theResponseShouldBe($string)
     {
-        PHPUnit_Framework_Assert::assertSame($string, $this->getResponseBody());
+        $body = $this->getResponseBody();
+        $message = sprintf("%s was expected for response body, but %s found instead", $string, $body);
+        if ($body !== $string) {
+            throw new \Exception($message);
+        }
     }
 
     /**
