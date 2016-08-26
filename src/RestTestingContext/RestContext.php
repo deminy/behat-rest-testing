@@ -8,6 +8,7 @@
 namespace Behat\RestTestingContext;
 
 use Behat\Behat\Context\Step;
+use Exception;
 
 /**
  * Rest context.
@@ -18,13 +19,12 @@ class RestContext extends BaseContext
      * @Given /^the response should contain field "([^"]*)"$/
      * @param string $name
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function theResponseHasAField($name)
     {
-        $message = sprintf("Field %s not found in response.", $name);
         if (!array_key_exists($name, $this->getResponseData())) {
-            throw new \Exception($message);
+            throw new Exception("Field '{$name}' not found in response.");
         }
     }
 
@@ -32,13 +32,12 @@ class RestContext extends BaseContext
      * @Then /^in the response there is no field called "([^"]*)"$/
      * @param string $name
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function theResponseShouldNotHaveAField($name)
     {
-        $message = sprintf("Field %s should not have been found in response, but was.", $name);
         if (array_key_exists($name, $this->getResponseData())) {
-            throw new \Exception($message);
+            throw new Exception("Field '{$name}' should not have been found in response, but was.");
         }
     }
 
@@ -47,14 +46,20 @@ class RestContext extends BaseContext
      * @param string $name
      * @param string $value
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function valueOfTheFieldEquals($name, $value)
     {
         $this->theResponseHasAField($name);
-        $message = sprintf("%s was expected for %s, but %s found instead", $value, $name, $this->responseData[$name]);
         if ($this->responseData[$name] != $value) {
-            throw new \Exception($message);
+            throw new Exception(
+                sprintf(
+                    'Value "%s" was expected for field "%s", but value "%s" found instead.',
+                    $value,
+                    $name,
+                    $this->responseData[$name]
+                )
+            );
         }
     }
 
@@ -64,7 +69,7 @@ class RestContext extends BaseContext
      * @param string $type
      * @param string $value
      * @return void
-     * @throws \Exception
+     * @throws Exception
      * @todo Need to be better designed.
      */
     public function fieldIsOfTypeWithValue($name, $type, $value)
@@ -75,7 +80,7 @@ class RestContext extends BaseContext
             case 'int':
             case 'integer':
                 if (!preg_match('/^(0|[1-9]\d*)$/', $value)) {
-                    throw new \Exception(
+                    throw new Exception(
                         sprintf(
                             'Field "%s" is not of the correct type: %s!',
                             $name,
@@ -86,7 +91,7 @@ class RestContext extends BaseContext
                 // TODO: We didn't check if the value is as expected here.
                 break;
             default:
-                throw new \Exception('Unsupported data type: ' . $type);
+                throw new Exception('Unsupported data type: ' . $type);
                 break;
         }
     }
@@ -95,14 +100,13 @@ class RestContext extends BaseContext
      * @Given /^the response should be "([^"]*)"$/
      * @param string $string
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function theResponseShouldBe($string)
     {
         $body = $this->getResponseBody();
-        $message = sprintf("%s was expected for response body, but %s found instead", $string, $body);
         if ($body !== $string) {
-            throw new \Exception($message);
+            throw new Exception("'{$string}' was expected for response body, but '{$body}' found instead.");
         }
     }
 
@@ -127,7 +131,7 @@ class RestContext extends BaseContext
      *
      * @param string $string A JSON string.
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      * @see http://www.php.net/json_last_error
      */
     protected function decodeJson($string)
@@ -158,6 +162,6 @@ class RestContext extends BaseContext
                 break;
         }
 
-        throw new \Exception('JSON decoding error: ' . $message);
+        throw new Exception('JSON decoding error: ' . $message);
     }
 }
