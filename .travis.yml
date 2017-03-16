@@ -2,6 +2,7 @@ language: php
 
 php:
   - hhvm
+  - 7.1
   - 7.0
   - 5.6
   - 5.5
@@ -24,6 +25,8 @@ addons:
 env:
   - BEHAT_VERSION="3.0.*"
   - BEHAT_VERSION="3.1.*"
+  - BEHAT_VERSION="3.2.*"
+  - BEHAT_VERSION="3.3.*"
 
 before_install:
   # start a web server on port 8081, running in the background
