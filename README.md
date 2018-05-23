@@ -1,6 +1,5 @@
 # Summary
 [![Build Status](https://travis-ci.org/deminy/behat-rest-testing.svg?branch=master)](https://travis-ci.org/deminy/behat-rest-testing)
-[![HHVM Status](http://hhvm.h4cc.de/badge/deminy/behat-rest-testing.svg)](http://hhvm.h4cc.de/package/deminy/behat-rest-testing)
 [![Latest Stable Version](https://poser.pugx.org/deminy/behat-rest-testing/v/stable.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
 [![Latest Unstable Version](https://poser.pugx.org/deminy/behat-rest-testing/v/unstable.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
 [![License](https://poser.pugx.org/deminy/behat-rest-testing/license.svg)](https://packagist.org/packages/deminy/behat-rest-testing)
