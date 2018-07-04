@@ -10,7 +10,7 @@ default:
     #     progress: ~
     extensions:
         Behat\WebApiExtension:
-            base_url: http://localhost:8081
+            base_url: http://127.0.0.1
         Behat\RestTestingExtension:
     suites:
         default:
@@ -27,7 +27,7 @@ another_profile:
         '': %paths.base%/features/bootstrap
     extensions:
         Behat\WebApiExtension:
-            base_url: http://localhost:8081
+            base_url: http://127.0.0.1
     suites:
         other_features:
             paths:

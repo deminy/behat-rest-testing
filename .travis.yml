@@ -8,12 +8,8 @@ php:
   - 5.5
   - 5.4
 
-sudo: false
-
-addons:
-  apt:
-    packages:
-      - nginx
+services:
+  - docker
 
 env:
   - BEHAT_VERSION="3.0.*"
@@ -22,8 +18,8 @@ env:
   - BEHAT_VERSION="3.3.*"
 
 before_install:
-  # start a web server on port 8081, running in the background
-  - bin/start_server.sh
+  - docker-compose up -d
+  - docker ps -a
 
 install:
   - composer require behat/behat:${BEHAT_VERSION}
