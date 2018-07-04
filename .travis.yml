@@ -18,6 +18,7 @@ env:
   - BEHAT_VERSION="3.3.*"
 
 before_install:
+  - touch www/employees.json && chmod 777 www/employees.json
   - docker-compose up -d
   - docker ps -a
 
