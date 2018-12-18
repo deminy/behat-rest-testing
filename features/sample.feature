@@ -25,6 +25,7 @@ Feature: Testing sample REST services
                 "age": "27"
             }
             """"
+        And field "age" in the response should be an integer "27"
         And in the response there is no field called "gender"
 
     Scenario: Updating an Existing Employee
