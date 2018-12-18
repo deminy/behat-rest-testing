@@ -1,6 +1,11 @@
-3.0.2 / TDB
+3.0.3 / TDB
 ===========
 
+3.0.2 / 2018-12-17
+==================
+
+  * [#6] fix a broken step definition. Thanks @lfbn
+  * Run tests under PHP 7.2 and PHP 7.3.
   * Use Docker to run tests.
 
 3.0.1 / 2017-03-16
